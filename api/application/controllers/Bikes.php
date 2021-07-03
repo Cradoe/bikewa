@@ -1,4 +1,7 @@
 <?php
+
+use Hamcrest\Description;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . 'libraries/REST_Controller.php';
 
@@ -16,6 +19,10 @@ class Bikes extends REST_Controller
     function index_get()
     {
 
+        /* 
+            @Description Bikes Endpoint. Check for API connection.
+            Returns connection object
+        */
         $this->response([
             'status' => 'success',
             'message' => 'Bikes API Connected successful.',
@@ -26,6 +33,10 @@ class Bikes extends REST_Controller
 
     function view_get($id = '')
     {
+        /* 
+            @Description View Endpoint. Check for API connection.
+            Returns bike(s) object
+        */
         if ($id) {
             $bike = $this->bikes_model->get_bike($id);
             if ($bike == null) {
@@ -41,8 +52,7 @@ class Bikes extends REST_Controller
                 'status_code' => $this->status_code['ok'],
                 'data' => $bike
             ], $this->status_code['ok']);
-        }
-        else{
+        } else {
             $bikes = $this->bikes_model->get_available_bikes();
             if ($bikes == null) {
                 return $this->response([
@@ -59,5 +69,4 @@ class Bikes extends REST_Controller
             ], $this->status_code['ok']);
         }
     }
-
 }

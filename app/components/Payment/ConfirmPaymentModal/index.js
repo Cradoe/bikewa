@@ -3,19 +3,20 @@ import { StyleSheet, View } from "react-native";
 import { Button, Card, Modal, Text, Icon, Spinner } from "@ui-kitten/components";
 import { globalStyles } from "../../../shared/globalStyles";
 import { globalConstants } from "../../../constants";
-import { fetchBikeDetails } from "../../../actions/bikes";
+import { bookRide } from "../../../actions/bookings";
+import { connect } from "react-redux";
 
 const navigateIcon = ( props ) => (
   <Icon {...props} name="navigation-2-outline" />
 );
-export const ConfirmPaymentModal = ( { bikeId } ) => {
+export const ConfirmPayment = ( { user, bikeId } ) => {
   const [ visible, setVisible ] = useState( false ),
     [ hasMadeBooking, setHasMadeBooking ] = useState( false ),
     [ isProcessing, setIsProcessing ] = useState( true ),
     [ responseMessage, setResponseMessage ] = useState( null ),
-    [ bikeDetails, setBikeDetails ] = useState( {} ),
+    [ bookingCode, setBookingCode ] = useState( "" ),
     successCallback = ( data ) => {
-      setBikeDetails( data );
+      setBookingCode( data.code );
       setHasMadeBooking( true );
       setIsProcessing( false );
     },
@@ -23,17 +24,18 @@ export const ConfirmPaymentModal = ( { bikeId } ) => {
       setResponseMessage( error );
       setIsProcessing( false );
     },
-    emptyCallback = () => {
-      setIsProcessing( false );
-    },
     callback = {
       success: successCallback,
-      error: errorCallback,
-      empty: emptyCallback
+      error: errorCallback
     },
     processPayment = () => {
       setResponseMessage( null );
-      fetchBikeDetails( bikeId, callback );
+      const details = {
+        bikeId,
+        userId: user.id
+      }
+      setBookingCode( "" );
+      bookRide( details, callback )
     }
 
   useEffect( () => {
@@ -68,8 +70,8 @@ export const ConfirmPaymentModal = ( { bikeId } ) => {
 
                 <View>
                   <Text category="s1">Bike Unlocked Successfully.</Text>
-                  <Text category="s2" style={[ globalStyles.textCenter, globalStyles.mt40 ]}>Access Code: 3weuhu</Text>
-                  <Text category="h3" style={[ globalStyles.textCenter ]}>3weuhu</Text>
+                  <Text category="s2" style={[ globalStyles.textCenter, globalStyles.mt40 ]}>Access Code:</Text>
+                  <Text category="h3" style={[ globalStyles.textCenter ]}>{bookingCode}</Text>
                 </View>
                 <View style={[ globalStyles.flexRow, globalStyles.justifyCenter, globalStyles.mt20 ]}>
                   <Button
@@ -94,6 +96,15 @@ export const ConfirmPaymentModal = ( { bikeId } ) => {
     </>
   );
 };
+
+
+
+const mapStateToProps = ( state, ownProps ) => {
+  return {
+    user: state.user
+  };
+};
+export const ConfirmPaymentModal = connect( mapStateToProps )( ConfirmPayment );
 
 const styles = StyleSheet.create( {
   backdrop: {

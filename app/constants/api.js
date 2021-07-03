@@ -6,9 +6,11 @@ export const userAPI = {
 };
 
 export const bookingsAPI = {
-    USER_BOOKINGS_ENDPOINT: ( userId ) => {
+    BOOK_RIDE_ENDPOINT: ( userId ) => {
         return `${API_HOST}/users/bookings/${userId}`
-    }
+    },
+    USER_BOOKINGS_ENDPOINT: `${API_HOST}/users/bookings`
+
 }
 
 export const bikesAPI = {

@@ -26,63 +26,64 @@ import { ScrollView } from "react-native-gesture-handler";
 import { register } from "../../actions/users/";
 
 
-const Register = ({ navigation }) => {
-  const [secureTextEntry, setSecureTextEntry] = useState(true),
-    [responseMessage, setResponseMessage] = useState(null),
-    [isSubmitting, setIsSubmitting] = useState(false),
+const Register = ( { navigation } ) => {
+  const [ secureTextEntry, setSecureTextEntry ] = useState( true ),
+    [ responseMessage, setResponseMessage ] = useState( null ),
+    [ isSubmitting, setIsSubmitting ] = useState( false ),
     toggleSecureEntry = () => {
-      setSecureTextEntry(!secureTextEntry);
+      setSecureTextEntry( !secureTextEntry );
     },
-    renderIcon = (props) => (
+    renderIcon = ( props ) => (
       <TouchableWithoutFeedback onPress={toggleSecureEntry}>
         <Icon  {...props} name={secureTextEntry ? "eye-off" : "eye"} />
       </TouchableWithoutFeedback>
     ),
-    formSchema = yup.object({
+    formSchema = yup.object( {
       phone: yup
-        .string("Phone Numver must be valid.")
-        .required("Phone Numver is required."),
+        .string( "Phone Numver must be valid." )
+        .required( "Phone Numver is required." ),
       matricNo: yup
-        .string("Matric Number must be valid.")
-        .required("Matric Number is required."),
+        .string( "Matric Number must be valid." )
+        .required( "Matric Number is required." ),
       fullname: yup
-        .string("Fullname must be valid.")
-        .required("Fullname is required."),
+        .string( "Fullname must be valid." )
+        .required( "Fullname is required." ),
       password: yup
         .string()
-        .min(3, "Password must more than 3 characters.")
-        .required("Password is required.")
-    }),
+        .min( 3, "Password must more than 3 characters." )
+        .required( "Password is required." )
+    } ),
     dispatch = useDispatch(),
     successCallback = () => {
-      navigation.navigate("HomeScreen");
+      setIsSubmitting( false );
+      navigation.navigate( "HomeScreen" );
     },
-    errorCallback = (error) => {
-      console.log(error);
-      setIsSubmitting(false);
-      setResponseMessage(error);
+    errorCallback = ( error ) => {
+      console.log( error );
+      setIsSubmitting( false );
+      setResponseMessage( error );
     },
     callback = {
       success: successCallback,
       error: errorCallback
     },
-    onSubmit = (data) => {
-      setIsSubmitting(true);
-      setResponseMessage(null);
-        dispatch(register(data, callback));
+    onSubmit = ( data ) => {
+      setIsSubmitting( true );
+      setResponseMessage( null );
+      dispatch( register( data, callback ) );
     },
-    LoadingIndicator = (props) => (
-      <View style={[props.style, styles.indicator]}>
+    LoadingIndicator = ( props ) => (
+      <View style={[ props.style, styles.indicator ]}>
         {isSubmitting === true ? <Spinner status="control" size="small" /> : null}
       </View>
     );
 
   return (
-    <SafeAreaView style={[globalStyles.root, globalStyles.screenBg]}>
+    <SafeAreaView style={[ globalStyles.root, globalStyles.screenBg ]}>
       <Layout>
         <ScrollView>
-          <View style={[globalStyles.containerPadding]}>
-            <View style={[styles.heading]}>
+          <View style={[ globalStyles.containerPadding ]}>
+            <View style={[ styles.heading ]}>
               <Text
                 style={[
                   globalStyles.textPrimary,
@@ -93,7 +94,7 @@ const Register = ({ navigation }) => {
                 Sign Up
               </Text>
               <Text
-                style={[globalStyles.textPrimary, globalStyles.fontRegular]}
+                style={[ globalStyles.textPrimary, globalStyles.fontRegular ]}
               >
                 Glad to have you here!
               </Text>
@@ -108,16 +109,16 @@ const Register = ({ navigation }) => {
                   matricNo: "",
                   password: ""
                 }}
-                onSubmit={(details) => {
-                  onSubmit(details);
+                onSubmit={( details ) => {
+                  onSubmit( details );
                 }}
               >
-                {(props) => (
+                {( props ) => (
                   <>
-                    <View style={[globalStyles.formGroup]}>
+                    <View style={[ globalStyles.formGroup ]}>
                       <Input
                         label="Fullname"
-                        onChangeText={props.handleChange("fullname")}
+                        onChangeText={props.handleChange( "fullname" )}
                         value={props.values.fullname}
                         textStyle={globalStyles.textPrimary}
                         status={
@@ -127,11 +128,11 @@ const Register = ({ navigation }) => {
                         }
                       />
                     </View>
-                    
-                    <View style={[globalStyles.formGroup]}>
+
+                    <View style={[ globalStyles.formGroup ]}>
                       <Input
                         label="Matric No"
-                        onChangeText={props.handleChange("matricNo")}
+                        onChangeText={props.handleChange( "matricNo" )}
                         value={props.values.matricNo}
                         textStyle={globalStyles.textPrimary}
                         status={
@@ -141,12 +142,12 @@ const Register = ({ navigation }) => {
                         }
                       />
                     </View>
-                    
-                    <View style={[globalStyles.formGroup]}>
+
+                    <View style={[ globalStyles.formGroup ]}>
                       <Input
                         label="Phone Number"
                         keyboardType="phone-pad"
-                        onChangeText={props.handleChange("phone")}
+                        onChangeText={props.handleChange( "phone" )}
                         value={props.values.phone}
                         textStyle={globalStyles.textPrimary}
                         status={
@@ -156,15 +157,15 @@ const Register = ({ navigation }) => {
                         }
                       />
                     </View>
-                    
 
-                    <View style={[globalStyles.formGroup]}>
+
+                    <View style={[ globalStyles.formGroup ]}>
                       <Input
                         label="Password"
                         placeholder="***"
                         accessoryRight={renderIcon}
                         secureTextEntry={secureTextEntry}
-                        onChangeText={props.handleChange("password")}
+                        onChangeText={props.handleChange( "password" )}
                         value={props.values.password}
                         status={
                           props.values.password == "" && props.errors.password
@@ -174,7 +175,7 @@ const Register = ({ navigation }) => {
                         textStyle={globalStyles.textPrimary}
                       />
                     </View>
-                    <View style={[globalStyles.formGroup]}>
+                    <View style={[ globalStyles.formGroup ]}>
                       <Button
                         disabled={isSubmitting ? true : false}
                         onPress={props.handleSubmit}
@@ -190,10 +191,10 @@ const Register = ({ navigation }) => {
                         <Text style={globalStyles.textWhite}>Register</Text>
                       </Button>
                       {responseMessage ? <Text style={globalStyles.textDanger}>{responseMessage}</Text> : null
-                    
-                    }
+
+                      }
                     </View>
-                    <View style={[globalStyles.formGroup]}>
+                    <View style={[ globalStyles.formGroup ]}>
                       <Button
                         size="tiny"
                         style={[
@@ -201,7 +202,7 @@ const Register = ({ navigation }) => {
                           globalStyles.bgTransparent,
                           styles.round
                         ]}
-                        onPress={() => navigation.navigate("LoginScreen")}
+                        onPress={() => navigation.navigate( "LoginScreen" )}
                       >
                         <Text style={globalStyles.textPrimary}>
                           Already a member? login now
@@ -220,11 +221,11 @@ const Register = ({ navigation }) => {
 };
 export default Register;
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create( {
   heading: {
-    marginVertical: (globalConstants.SCREEN_HEIGHT * 4) / 100
+    marginVertical: ( globalConstants.SCREEN_HEIGHT * 4 ) / 100
   },
   round: {
     borderRadius: 50
   }
-});
+} );

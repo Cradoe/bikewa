@@ -65,24 +65,21 @@ class users_model extends CI_Model
                         'status_code' => $this->status_code['created'],
                         'data' => $user
                     );
-                } 
-                else {
+                } else {
                     return array(
                         'status' => "error",
                         'message' => "Opps! The server has encountered a temporary error. Please try again later",
                         'status_code' => $this->status_code['internalServerError']
                     );
                 }
-            } 
-            else {
+            } else {
                 return array(
                     'status' => "error",
                     'message' => "Opps! The server has encountered a temporary error. Please try again later",
                     'status_code' => $this->status_code['internalServerError']
                 );
             }
-        } 
-        catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             return array(
                 'status' => "error",
                 'message' => $th,
@@ -91,7 +88,8 @@ class users_model extends CI_Model
         };
     }
 
-    public function get_user_bookings($user_id){
+    public function get_user_bookings($user_id)
+    {
         $this->db->select('*');
         $this->db->where(['user_id' => $user_id]);
         $bookings = $this->db->order_by('id', "desc")->get('bookings')->result();
@@ -120,24 +118,39 @@ class users_model extends CI_Model
     }
 
 
-    public function get_user_bookings_count($user_id){
+    public function get_user_bookings_count($user_id)
+    {
         $this->db->select('id');
         $this->db->where(['user_id' => $user_id]);
         return $this->db->order_by('id', "desc")->get('bookings')->num_rows();
     }
 
 
-    public function add_user_booking($data){
-        if ($this->db->insert('bookings',$data)) {
-            $this->update_bike_status(['status' => 0 , 'id' => $data['bike_id'] ]);
-            return true;
+    public function add_user_booking($data)
+    {
+        if ($this->db->insert('bookings', $data)) {
+            $this->update_bike_status(['status' => 0, 'id' => $data['bike_id']]);
+            return $this->get_user_last_booking($data['user_id']);
         }
         return false;
     }
 
+
+    public function get_user_last_booking($user_id)
+    {
+        $this->db->select('*');
+        $this->db->where(['user_id' => $user_id]);
+        $booking = $this->db->order_by('id', "desc")->get('bookings')->row();
+
+        if ($booking) {
+            return $booking;
+        }
+        return null;
+    }
+
     public function update_bike_status($data)
     {
-        $update_bike_status = $this->db->update('bikes',$data,['id' => $data['id']]);
+        $update_bike_status = $this->db->update('bikes', $data, ['id' => $data['id']]);
         if ($update_bike_status) {
             return true;
         }
