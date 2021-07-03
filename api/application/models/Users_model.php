@@ -135,7 +135,6 @@ class users_model extends CI_Model
         return false;
     }
 
-
     public function get_user_last_booking($user_id)
     {
         $this->db->select('*');
@@ -155,5 +154,36 @@ class users_model extends CI_Model
             return true;
         }
         return false;
+    }
+
+
+    public function get_user_payments($user_id)
+    {
+        $this->db->select('*');
+        $this->db->where(['user_id' => $user_id]);
+        $payments = $this->db->order_by('id', "desc")->get('payments')->result();
+
+        if ($payments) {
+            return $payments;
+        }
+        return null;
+    }
+
+    public function add_user_payment($data)
+    {
+        if ($this->db->insert('payments', $data)) {
+            $user = $this->get_user($data['id']);
+
+            $new_balance = $user['balance'] + $data['amount'];
+            $this->update_user_balance(['balance' => $new_balance , 'id' => $data['bike_id']]);
+        }
+        return false;
+    }
+
+    public function get_user($id)
+    {
+        $this->db->where(["id" => $id]);
+        $user = $this->db->get('users')->row_array();
+        return $user;
     }
 }
