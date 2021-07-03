@@ -19,10 +19,6 @@ class Bikes extends REST_Controller
     function index_get()
     {
 
-        /* 
-            @Description Bikes Endpoint. Check for API connection.
-            Returns connection object
-        */
         $this->response([
             'status' => 'success',
             'message' => 'Bikes API Connected successful.',
@@ -33,10 +29,7 @@ class Bikes extends REST_Controller
 
     function view_get($id = '')
     {
-        /* 
-            @Description View Endpoint. Check for API connection.
-            Returns bike(s) object
-        */
+
         if ($id) {
             $bike = $this->bikes_model->get_bike($id);
             if ($bike == null) {
