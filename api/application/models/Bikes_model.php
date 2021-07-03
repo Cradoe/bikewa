@@ -59,7 +59,6 @@ class bikes_model extends CI_Model
 
     public function get_available_bikes()
     {
-
         $this->db->select('*');
         $bikes = $this->db->get_where('bikes', ['status' => 1])->result();
         return $bikes;
@@ -72,7 +71,19 @@ class bikes_model extends CI_Model
 
         if ($bike) {
             $bike['bookings'] = $this->_get_bike_bookings($id);
+            $bike['galleries'] = $this->_get_bike_galleries($id);
             return $bike;
+        }
+        return null;
+    }
+
+    public function _get_bike_galleries($bike_id)
+    {
+        $this->db->select('*');
+        $galleries = $this->db->get_where('galleries', ['bike_id' => $bike_id])->result();
+
+        if ($galleries) {
+            return $galleries;
         }
         return null;
     }

@@ -2,7 +2,7 @@
     class DB {
         
         public $host = 'localhost';
-        public $dbname = 'bike_sharing_e';
+        public $dbname = 'bikewa';
         public $password = '';
         public $username = 'root';
         public $conn;
