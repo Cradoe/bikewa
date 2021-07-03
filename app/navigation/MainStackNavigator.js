@@ -12,13 +12,13 @@ import HomeScreen from "../screens/homeScreen/";
 const Stack = createStackNavigator();
 
 const primaryHeader = {
-    headerStyle: {
-      backgroundColor: globalConstants.PRIMARY_COLOR,
-      elevation: 0, // remove shadow on Android
-      shadowOpacity: 0 // remove shadow on iOS
-    },
-    headerTintColor: "#fff"
+  headerStyle: {
+    backgroundColor: globalConstants.PRIMARY_COLOR,
+    elevation: 0, // remove shadow on Android
+    shadowOpacity: 0 // remove shadow on iOS
   },
+  headerTintColor: "#fff"
+},
   lightHeader = {
     headerStyle: {
       backgroundColor: globalConstants.SCREEN_BG
@@ -30,26 +30,24 @@ export const MainStackNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={screenOptionStyle}>
 
-      
-        
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
           options={{ headerShown: false }}
         />
-<Stack.Screen
+        <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}
           options={{ headerShown: false }}
         />
 
-<Stack.Screen
+        <Stack.Screen
           name="RegisterScreen"
           component={RegisterScreen}
           options={{ headerShown: false }}
         />
 
-<Stack.Screen
+        <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
           options={{ headerShown: false }}

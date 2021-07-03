@@ -17,11 +17,13 @@ import {
   View,
   StyleSheet,
   TouchableWithoutFeedback,
-  SafeAreaView
+  SafeAreaView,
+  Image
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { globalConstants } from "../../constants";
 import { login } from "../../actions/users/";
+import { animBikeTwo } from "../../shared/generalAssets";
 
 const Login = ( { navigation } ) => {
   const [ secureTextEntry, setSecureTextEntry ] = useState( true ),
@@ -73,22 +75,18 @@ const Login = ( { navigation } ) => {
     <SafeAreaView style={[ globalStyles.root, globalStyles.screenBg ]}>
       <Layout>
         <View style={[ globalStyles.containerPadding ]}>
-          <View style={[ styles.heading ]}>
-            <Text
-              style={[
-                globalStyles.textPrimary,
-                globalStyles.fontAltBold,
-                { fontSize: 30 }
-              ]}
-            >
-              Login
-            </Text>
-            <Text style={[ globalStyles.textPrimary, globalStyles.fontRegular ]}>
-              Welcome back!
-            </Text>
-          </View>
 
-          <Card>
+
+          <Card style={styles.loginCard}>
+            <View style={[ globalStyles.centerCenter ]}>
+              <Image source={animBikeTwo} style={styles.logo}></Image>
+              <View style={[ styles.heading ]}>
+
+                <Text style={[ globalStyles.textPrimary, globalStyles.fontRegular ]}>
+                  Sign in to continue
+                </Text>
+              </View>
+            </View>
             <Formik
               validationSchema={formSchema}
               initialValues={{
@@ -153,14 +151,14 @@ const Login = ( { navigation } ) => {
                     <Button
                       size="tiny"
                       style={[
-                        globalStyles.borderPrimary,
+                        globalStyles.noBorder,
                         globalStyles.bgTransparent,
                         styles.round
                       ]}
                       onPress={() => navigation.navigate( "RegisterScreen" )}
                     >
                       <Text style={globalStyles.textPrimary}>
-                        Don't have an account? sign up now
+                        New Member? Sign up now
                       </Text>
                     </Button>
                   </View>
@@ -176,10 +174,14 @@ const Login = ( { navigation } ) => {
 export default Login;
 
 const styles = StyleSheet.create( {
-  heading: {
-    marginVertical: ( globalConstants.SCREEN_HEIGHT * 10 ) / 100
+  loginCard: {
+    marginTop: ( globalConstants.SCREEN_HEIGHT * 20 ) / 100
   },
   round: {
     borderRadius: 50
+  },
+  logo: {
+    height: 120,
+    width: 150
   }
 } );

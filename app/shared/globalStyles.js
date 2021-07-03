@@ -1,7 +1,7 @@
 import { StatusBar, StyleSheet } from "react-native";
 import { globalConstants } from "../constants/global";
 
-export const globalStyles = StyleSheet.create({
+export const globalStyles = StyleSheet.create( {
     root: {
         // marginTop: StatusBar.currentHeight || 0,
         flex: 1
@@ -192,5 +192,10 @@ export const globalStyles = StyleSheet.create({
     },
     formControl: {
         borderColor: globalConstants.PRIMARY_COLOR
+    },
+    fullWidth: {
+        width: '100%',
+        justifyContent: "center",
+        alignItems: "center"
     }
-});
+} );

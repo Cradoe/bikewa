@@ -18,12 +18,14 @@ import {
   View,
   StyleSheet,
   TouchableWithoutFeedback,
-  SafeAreaView
+  SafeAreaView,
+  Image
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { globalConstants } from "../../constants";
 import { ScrollView } from "react-native-gesture-handler";
 import { register } from "../../actions/users/";
+import { primaryLogo } from "../../shared/generalAssets";
 
 
 const Register = ( { navigation } ) => {
@@ -79,20 +81,12 @@ const Register = ( { navigation } ) => {
     );
 
   return (
-    <SafeAreaView style={[ globalStyles.root, globalStyles.screenBg ]}>
+    <SafeAreaView style={[ globalStyles.root, globalStyles.bgSecondary ]}>
       <Layout>
-        <ScrollView>
+        <ScrollView style={globalStyles.bgSecondary}>
           <View style={[ globalStyles.containerPadding ]}>
             <View style={[ styles.heading ]}>
-              <Text
-                style={[
-                  globalStyles.textPrimary,
-                  globalStyles.fontAltBold,
-                  { fontSize: 30 }
-                ]}
-              >
-                Sign Up
-              </Text>
+              <Image source={primaryLogo} style={styles.logo}></Image>
               <Text
                 style={[ globalStyles.textPrimary, globalStyles.fontRegular ]}
               >
@@ -100,7 +94,7 @@ const Register = ( { navigation } ) => {
               </Text>
             </View>
 
-            <Card>
+            <Card style={{ backgroundColor: 'transparent' }}>
               <Formik
                 validationSchema={formSchema}
                 initialValues={{
@@ -120,7 +114,7 @@ const Register = ( { navigation } ) => {
                         label="Fullname"
                         onChangeText={props.handleChange( "fullname" )}
                         value={props.values.fullname}
-                        textStyle={globalStyles.textPrimary}
+                        textStyle={globalStyles.textSecondary}
                         status={
                           props.values.fullname == "" && props.errors.fullname
                             ? "danger"
@@ -134,7 +128,7 @@ const Register = ( { navigation } ) => {
                         label="Matric No"
                         onChangeText={props.handleChange( "matricNo" )}
                         value={props.values.matricNo}
-                        textStyle={globalStyles.textPrimary}
+                        textStyle={globalStyles.textSecondary}
                         status={
                           props.values.matricNo == "" && props.errors.matricNo
                             ? "danger"
@@ -149,7 +143,7 @@ const Register = ( { navigation } ) => {
                         keyboardType="phone-pad"
                         onChangeText={props.handleChange( "phone" )}
                         value={props.values.phone}
-                        textStyle={globalStyles.textPrimary}
+                        textStyle={globalStyles.textSecondary}
                         status={
                           props.values.phone == "" && props.errors.phone
                             ? "danger"
@@ -172,7 +166,7 @@ const Register = ( { navigation } ) => {
                             ? "danger"
                             : "warning"
                         }
-                        textStyle={globalStyles.textPrimary}
+                        textStyle={globalStyles.textSecondary}
                       />
                     </View>
                     <View style={[ globalStyles.formGroup ]}>
@@ -181,7 +175,7 @@ const Register = ( { navigation } ) => {
                         onPress={props.handleSubmit}
                         style={[
                           globalStyles.btn,
-                          globalStyles.bgSecondary,
+                          globalStyles.bgPrimary,
                           globalStyles.noBorder
                         ]}
                         accessoryLeft={
@@ -227,5 +221,9 @@ const styles = StyleSheet.create( {
   },
   round: {
     borderRadius: 50
+  },
+  logo: {
+    height: 40,
+    width: 150
   }
 } );
