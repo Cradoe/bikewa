@@ -160,4 +160,63 @@ class Users extends REST_Controller
         ], $this->status_code['created']);
     }
 
+
+
+    function payments_post()
+    {
+        $this->form_validation->set_rules('user_id', 'user ID', 'required');
+        $this->form_validation->set_rules('amount', 'amount', 'required');
+        $this->form_validation->set_rules('txref', 'Tx Ref', 'required');
+        if ($this->form_validation->run() === FALSE) {
+            return $this->response([
+                'status' => "failed",
+                'message' => "All inputs are required.",
+                'status_code' => $this->status_code['badRequest'],
+                'data' => []
+            ], $this->status_code['badRequest']);
+        }
+
+        $data = [
+            'user_id' => $this->input->post('user_id'),
+            'amount' => $this->input->post('amount'),
+            'txref' => $this->input->post('txref'),
+        ];
+
+        $payment = $this->users_model->add_user_payment($data);
+        if (!$payment) {
+            return $this->response([
+                'status' => "error",
+                'message' => "Payment not complete.",
+                'status_code' => $this->status_code['internalServerError'],
+            ], $this->status_code['internalServerError']);
+        }
+
+        return $this->response([
+            'status' => "success",
+            'message' => "You wallet was top uped  successfully.",
+            'status_code' => $this->status_code['created'],
+            'data' => $payment
+        ], $this->status_code['created']);
+    }
+
+
+    function payments_get($user_id)
+    {
+        if ($user_id) {
+            $user_payments = $this->users_model->get_user_payments($user_id);
+            if ($user_payments == null) {
+                return $this->response([
+                    'status' => "error",
+                    'message' => "You have no payments.",
+                    'status_code' => $this->status_code['ok'],
+                ], $this->status_code['ok']);
+            }
+            return $this->response([
+                'status' => "success",
+                'message' => "Your payments fetched successfully.",
+                'status_code' => $this->status_code['ok'],
+                'data' => $user_payments
+            ], $this->status_code['ok']);
+        }
+    }
 }
