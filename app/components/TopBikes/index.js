@@ -57,7 +57,7 @@ export const TopBikes = ( { navigation } ) => {
 
   return (
     <View>
-      <View style={[ globalStyles.flexRow, globalStyles.justifySpaceBetween ]}>
+      <View style={[ globalStyles.flexRow, globalStyles.justifySpaceBetween, globalStyles.mt20 ]}>
         <Text
           style={[
             globalStyles.fontAltBold,
@@ -65,9 +65,9 @@ export const TopBikes = ( { navigation } ) => {
             styles.heading
           ]}
         >
-          Top Bikes
+          Recommended Bikes
         </Text>
-        <Button accessoryRight={arrowIcon} size="tiny" appearance="ghost" onPress={() => navigation.navigate( "AllBikes" )}>More</Button>
+        <Button accessoryRight={arrowIcon} size="tiny" appearance="ghost" onPress={() => navigation.navigate( "AllBikes" )}>See More</Button>
       </View>
 
 
@@ -90,13 +90,15 @@ export const TopBikes = ( { navigation } ) => {
             <TouchableWithoutFeedback onPress={() => { viewBikeDetails( bike.id ) }} key={index}>
               <Layout style={[ styles.itemBox, globalStyles.shadowBox ]} level="2">
                 <Image source={{ uri: bike.image }} style={styles.thumb}></Image>
-                <View
-                  style={[
-                    globalStyles.flexRow,
-                    globalStyles.justifySpaceBetween,
-                    styles.location,
-                    globalStyles.shadowBox
-                  ]}                >
+
+                <View style={globalStyles.bgSecondary}>
+                  <Text
+                    style={[ globalStyles.textWhite, styles.title ]}
+                  >
+                    {bike.name}
+                  </Text>
+                </View>
+                <View style={[ styles.caption, globalStyles.flexRow, globalStyles.justifySpaceBetween ]}>
                   <Text style={globalStyles.textSmall}>
                     <Icon
                       style={styles.icon}
@@ -105,13 +107,7 @@ export const TopBikes = ( { navigation } ) => {
                     />
                     East Campus
                   </Text>
-                </View>
-                <View style={[ styles.caption, globalStyles.flexRow, globalStyles.justifySpaceBetween ]}>
-                  <Text
-                    style={[ globalStyles.textSecondary, styles.title ]}
-                  >
-                    {bike.name}
-                  </Text>
+
                   <Text style={globalStyles.textSmall}>&#8358; {numberWithCommas( bike.price_per_minute )}</Text>
                 </View>
               </Layout>
@@ -144,12 +140,11 @@ const styles = StyleSheet.create( {
     borderRadius: 5,
     width: ( 75 / 100 ) * globalConstants.SCREEN_WIDTH,
     marginRight: 20,
-    marginVertical: 10
+    marginVertical: 10,
   },
   thumb: {
-    marginTop: 30,
     width: "100%",
-    height: 130
+    height: 200
   },
   caption: {
     padding: 10
@@ -158,15 +153,10 @@ const styles = StyleSheet.create( {
     height: 10,
     width: 10
   },
-  location: {
-    position: "absolute",
-    top: 10,
-    width: "50%",
-    paddingHorizontal: 10,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-  },
   heading: {
-    fontSize: 20
+    fontSize: 15
+  },
+  title: {
+    paddingHorizontal: 20
   }
 } );

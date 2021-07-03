@@ -1,11 +1,11 @@
 import React from "react";
-import { Layout } from "@ui-kitten/components";
+import { Layout, Button } from "@ui-kitten/components";
 import { SafeAreaView } from "react-native";
 import { globalConstants } from "../../constants";
 import { Header } from "../../components/Header/"
-import { RecentRides } from "../../components/RecentRides/"
 import { TopBikes } from "../../components/TopBikes/"
 import { globalStyles } from "../../shared/globalStyles";
+import { WalletCard } from "../../components/WalletCard";
 
 const DashboardScreen = ( { navigation, route } ) => {
   return (
@@ -17,15 +17,12 @@ const DashboardScreen = ( { navigation, route } ) => {
           { height: globalConstants.SCREEN_HEIGHT }
         ]}
       >
-        <Header />
+        <WalletCard />
         <TopBikes
           categoryId={route.params ? route.params.id : 1}
           navigation={navigation}
         />
-        <RecentRides
-          categoryId={route.params ? route.params.id : 1}
-          navigation={navigation}
-        />
+        <Button style={[ globalStyles.bgPrimary, globalStyles.borderPrimary, globalStyles.mt20 ]}> Scan Qcode</Button>
       </Layout>
     </SafeAreaView>
   );

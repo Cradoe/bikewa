@@ -63,7 +63,7 @@ const AllBikes = ( { navigation } ) => {
             styles.heading
           ]}
         >
-          All Bikes
+          Browse Our Bikes
         </Text>
       </View>
 
@@ -86,14 +86,15 @@ const AllBikes = ( { navigation } ) => {
               <TouchableWithoutFeedback onPress={() => { viewBikeDetails( bike.id ) }} key={index}>
                 <Layout style={[ styles.itemBox, globalStyles.shadowBox ]} level="2">
                   <Image source={{ uri: bike.image }} style={styles.thumb}></Image>
-                  <View
-                    style={[
-                      globalStyles.flexRow,
-                      globalStyles.justifySpaceBetween,
-                      styles.location,
-                      globalStyles.shadowBox
-                    ]}
-                  >
+
+                  <View style={globalStyles.bgSecondary}>
+                    <Text
+                      style={[ globalStyles.textWhite, styles.title ]}
+                    >
+                      {bike.name}
+                    </Text>
+                  </View>
+                  <View style={[ styles.caption, globalStyles.flexRow, globalStyles.justifySpaceBetween ]}>
                     <Text style={globalStyles.textSmall}>
                       <Icon
                         style={styles.icon}
@@ -102,13 +103,7 @@ const AllBikes = ( { navigation } ) => {
                       />
                       East Campus
                     </Text>
-                  </View>
-                  <View style={[ styles.caption, globalStyles.flexRow, globalStyles.justifySpaceBetween ]}>
-                    <Text
-                      style={[ globalStyles.textSecondary, styles.title ]}
-                    >
-                      {bike.name}
-                    </Text>
+
                     <Text style={globalStyles.textSmall}>&#8358; {numberWithCommas( bike.price_per_minute )}</Text>
                   </View>
                 </Layout>
@@ -142,13 +137,11 @@ const styles = StyleSheet.create( {
   },
   itemBox: {
     borderRadius: 5,
-    marginVertical: 10,
-    height: 200
+    marginVertical: 10
   },
   thumb: {
-    marginTop: 30,
     width: "100%",
-    height: 130
+    height: 200
   },
   caption: {
     padding: 10
@@ -157,15 +150,11 @@ const styles = StyleSheet.create( {
     height: 10,
     width: 10
   },
-  location: {
-    position: "absolute",
-    top: 10,
-    width: "50%",
-    paddingHorizontal: 10,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-  },
+
   heading: {
-    fontSize: 20
+    fontSize: 15
+  },
+  title: {
+    paddingHorizontal: 20
   }
 } );

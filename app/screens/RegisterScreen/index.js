@@ -5,11 +5,8 @@ import {
   Layout,
   Text,
   Icon,
-  Popover,
   Spinner,
-  Card,
-  IndexPath,
-  SelectItem
+  Card
 } from "@ui-kitten/components";
 import { globalStyles } from "../../shared/globalStyles";
 import { Formik } from "formik";
@@ -184,7 +181,7 @@ const Register = ( { navigation } ) => {
                       >
                         <Text style={globalStyles.textWhite}>Register</Text>
                       </Button>
-                      {responseMessage ? <Text style={globalStyles.textDanger}>{responseMessage}</Text> : null
+                      {responseMessage ? <Text style={globalStyles.textWhite}>{responseMessage}</Text> : null
 
                       }
                     </View>

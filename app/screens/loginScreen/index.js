@@ -5,9 +5,7 @@ import {
   Layout,
   Text,
   Icon,
-  Popover,
   Spinner,
-  ButtonGroup,
   Card
 } from "@ui-kitten/components";
 import { globalStyles } from "../../shared/globalStyles";
@@ -20,7 +18,7 @@ import {
   SafeAreaView,
   Image
 } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { globalConstants } from "../../constants";
 import { login } from "../../actions/users/";
 import { animBikeTwo } from "../../shared/generalAssets";
