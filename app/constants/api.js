@@ -13,7 +13,7 @@ export const bookingsAPI = {
 
 export const bikesAPI = {
     ALL_BIKES_ENDPOINT: `${API_HOST}/bikes/view`,
-    BIKE_DETAILS_ENDPOINT: () => {
-        return `${API_HOST}/bikes/view/${userId}`
+    BIKE_DETAILS_ENDPOINT: ( bikeId ) => {
+        return `${API_HOST}/bikes/view/${bikeId}`
     }
 }

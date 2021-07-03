@@ -33,25 +33,21 @@ class bikes_model extends CI_Model
                         'status_code' => $this->status_code['created'],
                         'data' => $bike
                     );
-                } 
-                else {
+                } else {
                     return array(
                         'status' => "error",
                         'message' => "Opps! The server has encountered a temporary error. Please try again later",
                         'status_code' => $this->status_code['internalServerError']
                     );
                 }
-            } 
-            else {
+            } else {
                 return array(
                     'status' => "error",
                     'message' => "Opps! The server has encountered a temporary error. Please try again later",
                     'status_code' => $this->status_code['internalServerError']
                 );
             }
-
-        } 
-        catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             return array(
                 'status' => "error",
                 'message' => $th,
@@ -60,17 +56,19 @@ class bikes_model extends CI_Model
         };
     }
 
-    
-    public function get_available_bikes(){
+
+    public function get_available_bikes()
+    {
 
         $this->db->select('*');
-        $bikes = $this->db->get_where('bikes',['status' => 1])->result();
+        $bikes = $this->db->get_where('bikes', ['status' => 1])->result();
         return $bikes;
     }
 
-    public function get_bike($id){
+    public function get_bike($id)
+    {
         $this->db->select('*');
-        $bike = $this->db->get_where('bikes',['id' => $id,'status' => 1])->row_array();
+        $bike = $this->db->get_where('bikes', ['id' => $id, 'status' => 1])->row_array();
 
         if ($bike) {
             $bike['bookings'] = $this->_get_bike_bookings($id);
@@ -79,12 +77,13 @@ class bikes_model extends CI_Model
         return null;
     }
 
-    public function _get_bike_bookings($bike_id){
+    public function _get_bike_bookings($bike_id)
+    {
         $this->db->select('*');
-        $bookings = $this->db->get_where('bookings',['bike_id' => $bike_id])->result();
+        $bookings = $this->db->get_where('bookings', ['bike_id' => $bike_id])->result();
 
         if ($bookings) {
-            return $bike_bookings['bookings'];
+            return $bookings;
         }
         return null;
     }

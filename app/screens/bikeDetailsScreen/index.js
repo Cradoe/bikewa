@@ -11,22 +11,18 @@ import {
 import { globalConstants } from "../../constants";
 import { globalStyles } from "../../shared/globalStyles";
 import { ConfirmPaymentModal } from "../../components/Payment";
-import HTML from "react-native-render-html";
-import { bikeOne } from "../../shared/generalAssets";
 import { numberWithCommas } from "../../helpers/functions";
 import { fetchBikeDetails } from "../../actions/bikes";
 
 
 
 
-const BikeDetailsScreen = ( { navigation, route } ) => {
-  const bikeId = route.params.bikeId,
+const BikeDetailsScreen = ( { route, navigation } ) => {
+  const { bikeId } = route ? route.params ? route.params : 0 : 0,
     [ isFetchingData, setIsFetchingData ] = useState( true ),
     [ responseMessage, setResponseMessage ] = useState( null ),
     [ bikeDetails, setBikeDetails ] = useState( {} ),
     successCallback = ( data ) => {
-      console.log( data );
-      return;
       setBikeDetails( data );
       setIsFetchingData( false );
     },
@@ -53,17 +49,7 @@ const BikeDetailsScreen = ( { navigation, route } ) => {
       fetchDataFromServer();
     }
   }, [] );
-  const bike = {
-    name: 'Yello Red Bike',
-    image: bikeOne,
-    description: `
-    <div style="color:#333;text-align:justify">
-    <p  style="text-align:justify">This is where the description of the bike goes. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel animi, provident voluptate porro sit molestias eos voluptatem? Eos, dolores. Dolore quos atque tempora qui ad dignissimos corporis voluptatibus nam reiciendis.</p>
-    </div>
-`,
-    price: 3000,
-    location: "East Campus"
-  }, Header = ( props ) => (
+  const Header = ( props ) => (
     <View {...props}>
       <Image source={{ uri: bikeDetails.image }} style={styles.thumb}></Image>
 
@@ -106,13 +92,15 @@ const BikeDetailsScreen = ( { navigation, route } ) => {
                 name='pin-outline'
               /> Pick Point: {" "} East Campus
             </Text>
-            <ConfirmPaymentModal />
+            <ConfirmPaymentModal bikeId={bikeDetails.id} />
           </View>
 
           <ScrollView>
             <Layout style={[ globalStyles.containerPadding, globalStyles.screenBg ]}>
               <Card style={[ styles.card ]} status="warning" header={Header}>
-                <HTML source={{ html: bikeDetails.description }} contentWidth={contentWidth} />
+                <Text style={[ globalStyles.textJustify ]}>
+                  {bikeDetails.description}
+                </Text>
               </Card>
             </Layout>
           </ScrollView>
