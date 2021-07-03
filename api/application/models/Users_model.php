@@ -172,10 +172,11 @@ class users_model extends CI_Model
     public function add_user_payment($data)
     {
         if ($this->db->insert('payments', $data)) {
-            $user = $this->get_user($data['id']);
+            $user = $this->get_user($data['user_id']);
 
             $new_balance = $user['balance'] + $data['amount'];
-            $this->update_user_balance(['balance' => $new_balance , 'id' => $data['bike_id']]);
+            $this->update_user_balance(['balance' => $new_balance , 'id' => $data['user_id']]);
+            return $new_balance;
         }
         return false;
     }
@@ -185,5 +186,15 @@ class users_model extends CI_Model
         $this->db->where(["id" => $id]);
         $user = $this->db->get('users')->row_array();
         return $user;
+    }
+
+
+    public function update_user_balance($data)
+    {
+        $update_user_balance = $this->db->update('users', $data, ['id' => $data['id']]);
+        if ($update_user_balance) {
+            return true;
+        }
+        return false;
     }
 }
