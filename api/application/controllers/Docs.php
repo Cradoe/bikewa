@@ -19,8 +19,7 @@ class Docs extends CI_Controller
 		// 	echo 	'<script>
 		// 	window.location.href = "' . current_url() . '/view"
 		// 		  	</script>';
-		redirect("
-		http://127.0.0.1/bikewa/api/docs/view");
+		redirect("http://127.0.0.1/2021/bika/api");
 	}
 
 	public function view($controller_name = null)
