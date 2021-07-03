@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2021 at 07:31 PM
+-- Generation Time: Jul 03, 2021 at 09:13 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.5
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bike_sharing_e`
+-- Database: `bikewa`
 --
 
 -- --------------------------------------------------------
@@ -71,6 +71,30 @@ INSERT INTO `bikes` (`id`, `name`, `image`, `price_per_minute`, `description`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bike_galleries`
+--
+
+CREATE TABLE `bike_galleries` (
+  `id` int(11) NOT NULL,
+  `bike_id` int(11) NOT NULL,
+  `gallery` varchar(190) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bike_galleries`
+--
+
+INSERT INTO `bike_galleries` (`id`, `bike_id`, `gallery`, `created_at`, `updated_at`) VALUES
+(1, 1, 'a12.png', '2021-07-03 18:37:34', '2021-07-03 18:37:34'),
+(2, 1, 'a12.png', '2021-07-03 18:37:34', '2021-07-03 18:37:34'),
+(3, 4, 'a12.png', '2021-07-03 18:38:00', '2021-07-03 18:38:00'),
+(4, 4, 'a12.png', '2021-07-03 18:38:00', '2021-07-03 18:38:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `bookings`
 --
 
@@ -97,6 +121,35 @@ INSERT INTO `bookings` (`id`, `user_id`, `bike_id`, `created_at`, `updated_at`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount` decimal(10,0) NOT NULL,
+  `txref` varchar(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `user_id`, `amount`, `txref`, `created_at`, `updated_at`) VALUES
+(1, 1, '2300', 'kwdjhdjdgsghdsghdsgh', '2021-07-03 18:24:39', '2021-07-03 18:24:39'),
+(2, 1, '2300', 'kwdjhdjdgsghdsghdsgh', '2021-07-03 18:25:22', '2021-07-03 18:25:22'),
+(3, 1, '2300', 'kwdjhdjdgsghdsghdsgh', '2021-07-03 18:26:35', '2021-07-03 18:26:35'),
+(4, 1, '2300', 'kwdjhdjdgsghdsghdsgh', '2021-07-03 18:27:48', '2021-07-03 18:27:48'),
+(5, 1, '2300', 'kwdjhdjdgsghdsghdsgh', '2021-07-03 18:27:53', '2021-07-03 18:27:53'),
+(6, 1, '2300', 'kwdjhdjdgsghdsghdsgh', '2021-07-03 18:29:04', '2021-07-03 18:29:04'),
+(7, 1, '2300', 'kwdjhdjdgsghdsghdsgh', '2021-07-03 18:29:07', '2021-07-03 18:29:07'),
+(8, 1, '2300', 'kwdjhdjdgsghdsghdsgh', '2021-07-03 18:29:09', '2021-07-03 18:29:09');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -116,7 +169,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fullname`, `matric_number`, `phone`, `balance`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Tapo Sayanic', 'you@gmail.com', '09078478478', '23000', 'MWE3bVh2aXBYdGpDVjdNc2lhWmdrZz09', '2021-07-02 15:55:09', '2021-07-02 16:46:34'),
+(1, 'Tapo Sayanic', 'you@gmail.com', '09078478478', '29900', 'MWE3bVh2aXBYdGpDVjdNc2lhWmdrZz09', '2021-07-02 15:55:09', '2021-07-03 18:29:09'),
 (2, 'Tapo Sayanic', 'you2@gmail.com', '09078478478', '23000', 'MWE3bVh2aXBYdGpDVjdNc2lhWmdrZz09', '2021-07-02 15:57:07', '2021-07-02 16:46:38'),
 (3, 'fd', 'fd', 'ffd', '23000', 'YzBuU1hBbWhsYityWHFyZWJUMTc0UT09', '2021-07-03 04:21:50', '2021-07-03 04:21:50');
 
@@ -137,9 +190,21 @@ ALTER TABLE `bikes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `bike_galleries`
+--
+ALTER TABLE `bike_galleries`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `bookings`
 --
 ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -165,10 +230,22 @@ ALTER TABLE `bikes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `bike_galleries`
+--
+ALTER TABLE `bike_galleries`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
