@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, Layout, Card } from "@ui-kitten/components";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import {
   Image,
   StyleSheet,
@@ -8,21 +8,12 @@ import {
   ScrollView
 } from "react-native";
 import { globalStyles } from "../../shared/globalStyles";
-import {
-  bikeOne
-} from "../../shared/generalAssets";
 import { globalConstants } from "../../constants";
 import { getBookings } from "../../actions/bookings";
-import { timeSince } from "../../helpers";
+import { timeSince } from "../../helpers"; import moment from "moment";
 
-// {
-//   name: "Yellow Red Bike",
-//   date: "15/03/2021",
-//   image: bikeOne,
-//   timeSpent: "15 minutes"
-// }
 
-const Rides = ( { navigation, user } ) => {
+const Rides = ( { user } ) => {
   const [ isFetchingData, setIsFetchingData ] = useState( true ),
     [ responseMessage, setResponseMessage ] = useState( null ),
     [ bikeList, setBikeList ] = useState( [] );
@@ -97,7 +88,7 @@ const Rides = ( { navigation, user } ) => {
               <Text style={[ globalStyles.textGray, styles.title ]}>
                 {booking.bike.name}
               </Text>
-              <Text style={styles.small}> {timeSince( booking.start_time )}</Text>
+              <Text style={styles.small}> {moment( booking.start_time ).fromNow()}</Text>
               <Text style={styles.small}> {booking.minutes} ride</Text>
             </View>
           </Layout>

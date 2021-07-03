@@ -14,9 +14,11 @@ export const convertObjToFormData = ( object ) => {
 
 export const timeSince = ( date ) => {
     const t = date.split( /[- :]/ ),
-        u = new Date( t );
-    var time = new Date( Date.now() - u.getTime() );
+        d = new Date( Date.UTC( t[ 0 ], t[ 1 ] - 1, t[ 2 ], t[ 3 ], t[ 4 ], t[ 5 ] ) ),
+        u = new Date( d ).getMilliseconds();
+    var time = new Date( Date.now() - u );
     console.log( "date", u );
+    console.log( "time", time );
     switch ( typeof time ) {
         case "number":
             break;
