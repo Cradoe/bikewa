@@ -80,7 +80,7 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
-	'database' => 'bike_sharing_e',
+	'database' => 'bikewa',
 
 	// 'hostname' => 'localhost',
 	// 'username' => 'fricypby_api_account',
