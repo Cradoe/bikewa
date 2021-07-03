@@ -10,17 +10,18 @@ import {
 import { globalStyles } from "../../shared/globalStyles";
 import { globalConstants } from "../../constants";
 import { getBookings } from "../../actions/bookings";
-import { timeSince } from "../../helpers"; import moment from "moment";
+import moment from "moment";
+import { numberWithCommas } from "../../helpers";
 
 
 const Rides = ( { user } ) => {
   const [ isFetchingData, setIsFetchingData ] = useState( true ),
     [ responseMessage, setResponseMessage ] = useState( null ),
-    [ bikeList, setBikeList ] = useState( [] );
-  const successCallback = ( data ) => {
-    setBikeList( data );
-    setIsFetchingData( false );
-  },
+    [ bikeList, setBikeList ] = useState( [] ),
+    successCallback = ( data ) => {
+      setBikeList( data );
+      setIsFetchingData( false );
+    },
     errorCallback = ( error ) => {
       setResponseMessage( error );
       setIsFetchingData( false );
@@ -44,8 +45,7 @@ const Rides = ( { user } ) => {
     if ( bikeList.length === 0 ) {
       fetchDataFromServer()
     }
-  }
-    , [] )
+  }, [] )
   return (
     <View style={globalStyles.mt30}>
       <Text
@@ -89,7 +89,8 @@ const Rides = ( { user } ) => {
                 {booking.bike.name}
               </Text>
               <Text style={styles.small}> {moment( booking.start_time ).fromNow()}</Text>
-              <Text style={styles.small}> {booking.minutes} ride</Text>
+
+              <Text style={styles.small}> &#8358;{numberWithCommas( booking.price )} for {booking.minutes} minutes ride</Text>
             </View>
           </Layout>
         ) ) ) : (
@@ -107,7 +108,6 @@ const Rides = ( { user } ) => {
 };
 
 const mapStateToProps = ( state, ownProps ) => {
-  console.log( "user", state.user );
   return {
     user: state.user
   };

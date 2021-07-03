@@ -5,8 +5,15 @@ export const userAPI = {
     SIGNUP_ENDPOINT: `${API_HOST}/users/register`
 };
 
-export const bookingAPI = {
-    USER_BOOKINGS_ENDPOINT: (userId) => {
+export const bookingsAPI = {
+    USER_BOOKINGS_ENDPOINT: ( userId ) => {
         return `${API_HOST}/users/bookings/${userId}`
-    },
+    }
+}
+
+export const bikesAPI = {
+    ALL_BIKES_ENDPOINT: `${API_HOST}/bikes/view`,
+    BIKE_DETAILS_ENDPOINT: () => {
+        return `${API_HOST}/bikes/view/${userId}`
+    }
 }

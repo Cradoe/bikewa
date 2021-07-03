@@ -1,16 +1,14 @@
 import { Alert } from "react-native";
-import { userAPI, globalConstants, bookingsAPI } from "../../constants";
+import { globalConstants, bikesAPI } from "../../constants";
 import {
-    catchApiRequestError,
-    convertObjToFormData,
-    handleApiResponseError
-} from "../../helpers/";
+    catchApiRequestError
+} from "../../helpers";
 
 
 
-export const getBookings = ( userId, callback = {} ) => {
+export const fetchAllBikes = ( callback = {} ) => {
     try {
-        return fetch( bookingsAPI.USER_BOOKINGS_ENDPOINT( userId ), {
+        return fetch( bikesAPI.ALL_BIKES_ENDPOINT, {
             ...globalConstants.GET_HEADER
         } )
             .then( ( response ) => response.json() )

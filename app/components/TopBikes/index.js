@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, Layout, Icon, Button } from "@ui-kitten/components";
+import React, { useState, useEffect } from "react";
+import { Text, Layout, Icon, Button, Spinner, Card } from "@ui-kitten/components";
 import {
   Image,
   StyleSheet,
@@ -8,129 +8,148 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
 import { globalStyles } from "../../shared/globalStyles";
-import {
-  bikeThree,
-  bikeTwo,
-  bikeOne
-} from "../../shared/generalAssets";
+import { fetchAllBikes } from "../../actions/bikes";
 import { globalConstants } from "../../constants";
 import { numberWithCommas } from "../../helpers/functions";
 
-const bikes = [
-  {
-    name: "Yellow Red Bike",
-    price: 2000,
-    location: 'East Campus',
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    image: bikeOne
-  },
-  {
-    name: "Yellow Red Bike",
-    price: 2000,
-    location: 'East Campus',
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    image: bikeTwo
-  },
-  {
-    name: "Yellow Red Bike",
-    price: 2000,
-    location: 'East Campus',
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    image: bikeThree
-  },
-  {
-    name: "Yellow Red Bike",
-    price: 2000,
-    location: 'East Campus',
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    image: bikeThree
-  },
-  {
-    name: "Yellow Red Bike",
-    price: 2000,
-    location: 'East Campus',
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    image: bikeThree
-  }
-];
+export const TopBikes = ( { navigation } ) => {
 
-export const TopBikes = ({ navigation, categoryId }) => {
-  const viewBikeDetails = () => {
-    navigation.navigate("BikeDetails");
+  const [ isFetchingData, setIsFetchingData ] = useState( true ),
+    [ responseMessage, setResponseMessage ] = useState( null ),
+    [ bikeList, setBikeList ] = useState( [] ),
+    successCallback = ( data ) => {
+      setBikeList( data );
+      setIsFetchingData( false );
+    },
+    errorCallback = ( error ) => {
+      setResponseMessage( error );
+      setIsFetchingData( false );
+    },
+    emptyCallback = () => {
+      setIsFetchingData( false );
+    },
+    callback = {
+      success: successCallback,
+      error: errorCallback,
+      empty: emptyCallback
+    },
+    fetchDataFromServer = () => {
+      setResponseMessage( null );
+      setIsFetchingData( true );
+      fetchAllBikes( callback );
+    }
+
+  useEffect( () => {
+    if ( bikeList.length === 0 ) {
+      fetchDataFromServer()
+    }
+  }, [] );
+  const viewBikeDetails = ( bikeId ) => {
+    console.log( "ff" );
+    navigation.navigate( "BikeDetails", {
+      bikeId
+    } );
   };
-  
-const arrowIcon = (props)=>(
-  <Icon {...props} name="arrowhead-right-outline" />
-);
+
+  const arrowIcon = ( props ) => (
+    <Icon {...props} name="arrowhead-right-outline" />
+  );
 
   return (
     <View>
-     <View style={[globalStyles.flexRow,globalStyles.justifySpaceBetween]}>
-      <Text
-        style={[
-          globalStyles.fontAltBold,
-          globalStyles.textBold,
-          styles.heading
-        ]}
-      >
-        Top Bikes
-      </Text>
-      <Button accessoryRight={arrowIcon} size="tiny" appearance="ghost" onPress={()=>navigation.navigate("AllBikes")}>More</Button>
-     </View>
-      <ScrollView
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        scrollEventThrottle={200}
-        decelerationRate="fast"
-      >
-        {bikes.map((bike, index) => (
-          <TouchableWithoutFeedback onPress={viewBikeDetails} key={index}>
-            <Layout style={[styles.itemBox, globalStyles.shadowBox]} level="2">
-              <Image source={bike.image} style={styles.thumb}></Image>
-              <View
-                style={[
-                  globalStyles.flexRow,
-                  globalStyles.justifySpaceBetween,
-                  styles.location,
-                  globalStyles.shadowBox
-                ]}
-              >
-                <Text style={globalStyles.textSmall}>  
-                  <Icon
-                    style={styles.icon}
-                    fill={globalConstants.PRIMARY_COLOR}
-                    name='pin-outline'
-                  />
-                  {bike.location}
+      <View style={[ globalStyles.flexRow, globalStyles.justifySpaceBetween ]}>
+        <Text
+          style={[
+            globalStyles.fontAltBold,
+            globalStyles.textBold,
+            styles.heading
+          ]}
+        >
+          Top Bikes
+        </Text>
+        <Button accessoryRight={arrowIcon} size="tiny" appearance="ghost" onPress={() => navigation.navigate( "AllBikes" )}>More</Button>
+      </View>
+
+
+      {responseMessage ? <Text style={globalStyles.textDanger}>{responseMessage}</Text> : null}
+
+
+
+      {isFetchingData ?
+        ( <Card style={[ styles.itemBox, globalStyles.centerCenter, styles.loaderCard ]} level="2">
+          <Spinner status="primary" size="medium" />
+        </Card> )
+        :
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          scrollEventThrottle={200}
+          decelerationRate="fast"
+        >
+          {bikeList.length > 0 ? ( bikeList.map( ( bike, index ) => (
+            <TouchableWithoutFeedback onPress={() => { viewBikeDetails( bike.id ) }} key={index}>
+              <Layout style={[ styles.itemBox, globalStyles.shadowBox ]} level="2">
+                <Image source={{ uri: bike.image }} style={styles.thumb}></Image>
+                <View
+                  style={[
+                    globalStyles.flexRow,
+                    globalStyles.justifySpaceBetween,
+                    styles.location,
+                    globalStyles.shadowBox
+                  ]}                >
+                  <Text style={globalStyles.textSmall}>
+                    <Icon
+                      style={styles.icon}
+                      fill={globalConstants.PRIMARY_COLOR}
+                      name='pin-outline'
+                    />
+                    East Campus
+                  </Text>
+                </View>
+                <View style={[ styles.caption, globalStyles.flexRow, globalStyles.justifySpaceBetween ]}>
+                  <Text
+                    style={[ globalStyles.textSecondary, styles.title ]}
+                  >
+                    {bike.name}
+                  </Text>
+                  <Text style={globalStyles.textSmall}>&#8358; {numberWithCommas( bike.price_per_minute )}</Text>
+                </View>
+              </Layout>
+            </TouchableWithoutFeedback>
+          ) ) ) :
+            <Card>
+              <View style={[ styles.caption, globalStyles.justifySpaceBetween ]}>
+                <Text style={[ globalStyles.textGray, styles.title ]}>
+                  No Bike available
                 </Text>
               </View>
-              <View style={[styles.caption, globalStyles.flexRow, globalStyles.justifySpaceBetween]}>
-                <Text     
-                  style={[globalStyles.textSecondary, styles.title]}
-                >
-                  {bike.name}
-                </Text>
-                <Text style={globalStyles.textSmall}>&#8358; {numberWithCommas(bike.price)}</Text>
-              </View>
-            </Layout>
-          </TouchableWithoutFeedback>
-        ))}
-      </ScrollView>
+            </Card>
+          }
+
+        </ScrollView>
+      }
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create( {
+  loaderCard: {
+    borderRadius: 5,
+    width: ( 90 / 100 ) * globalConstants.SCREEN_WIDTH,
+    marginRight: 20,
+    height: ( 27 / 100 ) * globalConstants.SCREEN_HEIGHT,
+    marginVertical: 10
+  },
   itemBox: {
     borderRadius: 5,
-    width: (75 / 100) * globalConstants.SCREEN_WIDTH,
+    width: ( 75 / 100 ) * globalConstants.SCREEN_WIDTH,
     marginRight: 20,
     marginVertical: 10
   },
   thumb: {
-    marginTop:30,
+    marginTop: 30,
     width: "100%",
-    height: 150
+    height: 130
   },
   caption: {
     padding: 10
@@ -150,4 +169,4 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 20
   }
-});
+} );
