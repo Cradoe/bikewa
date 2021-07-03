@@ -44,10 +44,10 @@ export const TopBikes = ( { navigation } ) => {
       fetchDataFromServer()
     }
   }, [] );
-  const viewBikeDetails = ( bikeId ) => {
-    console.log( "ff" );
+  const viewBikeDetails = ( bikeId, name ) => {
     navigation.navigate( "BikeDetails", {
-      bikeId
+      bikeId,
+      name
     } );
   };
 
@@ -67,7 +67,7 @@ export const TopBikes = ( { navigation } ) => {
         >
           Recommended Bikes
         </Text>
-        <Button accessoryRight={arrowIcon} size="tiny" appearance="ghost" onPress={() => navigation.navigate( "AllBikes" )}>See More</Button>
+        <Button accessoryRight={arrowIcon} size="tiny" appearance="ghost" onPress={() => navigation.navigate( "AllBikes", { name: "Browse Our Bikes" } )}>See More</Button>
       </View>
 
 
@@ -87,7 +87,9 @@ export const TopBikes = ( { navigation } ) => {
           decelerationRate="fast"
         >
           {bikeList.length > 0 ? ( bikeList.map( ( bike, index ) => (
-            <TouchableWithoutFeedback onPress={() => { viewBikeDetails( bike.id ) }} key={index}>
+            <TouchableWithoutFeedback onPress={() => {
+              viewBikeDetails( bike.id, bike.name )
+            }} key={index}>
               <Layout style={[ styles.itemBox, globalStyles.shadowBox ]} level="2">
                 <Image source={{ uri: bike.image }} style={styles.thumb}></Image>
 

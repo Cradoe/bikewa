@@ -14,9 +14,6 @@ import { ConfirmPaymentModal } from "../../components/Payment";
 import { numberWithCommas } from "../../helpers/functions";
 import { fetchBikeDetails } from "../../actions/bikes";
 
-
-
-
 const BikeDetailsScreen = ( { route, navigation } ) => {
   const { bikeId } = route ? route.params ? route.params : 0 : 0,
     [ isFetchingData, setIsFetchingData ] = useState( true ),
@@ -63,6 +60,7 @@ const BikeDetailsScreen = ( { route, navigation } ) => {
           &#8358;{numberWithCommas( bikeDetails.price_per_minute )}
         </Text>
       </Text>
+      <ConfirmPaymentModal bikeId={bikeDetails.id} />
     </View>
   );
 
@@ -78,23 +76,6 @@ const BikeDetailsScreen = ( { route, navigation } ) => {
         </Card>
       ) :
         <>
-          <View
-            style={[
-              globalStyles.flexRow,
-              globalStyles.justifySpaceBetween,
-              styles.misc
-            ]}
-          >
-            <Text style={globalStyles.textSmall}>
-              <Icon
-                style={styles.icon}
-                fill={globalConstants.PRIMARY_COLOR}
-                name='pin-outline'
-              /> Pick Point: {" "} East Campus
-            </Text>
-            <ConfirmPaymentModal bikeId={bikeDetails.id} />
-          </View>
-
           <ScrollView>
             <Layout style={[ globalStyles.containerPadding, globalStyles.screenBg ]}>
               <Card style={[ styles.card ]} status="warning" header={Header}>

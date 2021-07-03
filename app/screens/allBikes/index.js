@@ -47,31 +47,16 @@ const AllBikes = ( { navigation } ) => {
       fetchDataFromServer()
     }
   }, [] );
-  const viewBikeDetails = ( bikeId ) => {
+  const viewBikeDetails = ( bikeId, name ) => {
     navigation.navigate( "BikeDetails", {
-      bikeId
+      bikeId,
+      name
     } );
   };
 
   return (
     <SafeAreaView>
-      <View style={[ globalStyles.flexRow, globalStyles.justifySpaceBetween, globalStyles.containerPadding ]}>
-        <Text
-          style={[
-            globalStyles.fontAltBold,
-            globalStyles.textBold,
-            styles.heading
-          ]}
-        >
-          Browse Our Bikes
-        </Text>
-      </View>
-
-
       {responseMessage ? <Text style={globalStyles.textDanger}>{responseMessage}</Text> : null}
-
-
-
       {isFetchingData ?
         ( <Card style={[ styles.itemBox, globalStyles.centerCenter, styles.loaderCard ]} level="2">
           <Spinner status="primary" size="medium" />
@@ -83,7 +68,9 @@ const AllBikes = ( { navigation } ) => {
         >
           <Layout style={[ globalStyles.screenBg, globalStyles.containerPadding ]}>
             {bikeList.length > 0 ? ( bikeList.map( ( bike, index ) => (
-              <TouchableWithoutFeedback onPress={() => { viewBikeDetails( bike.id ) }} key={index}>
+              <TouchableWithoutFeedback onPress={() => {
+                viewBikeDetails( bike.id, bike.name )
+              }} key={index}>
                 <Layout style={[ styles.itemBox, globalStyles.shadowBox ]} level="2">
                   <Image source={{ uri: bike.image }} style={styles.thumb}></Image>
 

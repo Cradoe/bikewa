@@ -40,17 +40,18 @@ export const ConfirmPayment = ( { user, bikeId } ) => {
 
   useEffect( () => {
     if ( !hasMadeBooking ) {
-      processPayment();
+      // processPayment();
     }
   }, [] );
   return (
     <>
       <Button
+        style={globalStyles.mt20}
         accessoryRight={navigateIcon} onPress={() => setVisible( true )}
         status="primary"
         appearance="outline"
-        size="tiny">
-        <Text style={globalStyles.textSmall}>Book Bike</Text>
+        size="medium">
+        <Text style={globalStyles.textSmall}>Unlock Bike</Text>
       </Button>
 
       <Modal visible={visible} backdropStyle={styles.backdrop}>
@@ -67,7 +68,6 @@ export const ConfirmPayment = ( { user, bikeId } ) => {
           {
             hasMadeBooking ? (
               <>
-
                 <View>
                   <Text category="s1">Bike Unlocked Successfully.</Text>
                   <Text category="s2" style={[ globalStyles.textCenter, globalStyles.mt40 ]}>Access Code:</Text>
@@ -90,7 +90,6 @@ export const ConfirmPayment = ( { user, bikeId } ) => {
                 </View>
               </> ) : null
           }
-
         </Card>
       </Modal>
     </>

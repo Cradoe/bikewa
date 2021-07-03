@@ -27,20 +27,13 @@ export const HomeStackNavigator = () => {
       <Stack.Screen
         name="AllBikes"
         component={AllBikes}
-        options={{
-          title: "",
-          ...lightHeader
-        }}
+        options={( { route } ) => ( { title: route.params.name, ...lightHeader } )}
       />
 
-      
-<Stack.Screen
+      <Stack.Screen
         name="BikeDetails"
         component={BikeDetailsScreen}
-        options={{
-          title: "",
-          ...lightHeader
-        }}
+        options={( { route } ) => ( { title: route.params.name, ...lightHeader } )}
       />
     </Stack.Navigator>
   );
