@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Button } from "@ui-kitten/components";
+import { Layout } from "@ui-kitten/components";
 import { SafeAreaView, ScrollView } from "react-native";
 import { TopBikes } from "../../components/TopBikes/"
 import { globalStyles } from "../../shared/globalStyles";
@@ -16,7 +16,7 @@ const DashboardScreen = ( { navigation, route } ) => {
       >
         <ScrollView style={[ globalStyles.mb20,
         globalStyles.containerPadding ]}>
-          <WalletCard />
+          <WalletCard navigation={navigation} />
 
           <TopBikes
             navigation={navigation}

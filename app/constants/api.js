@@ -10,7 +10,6 @@ export const bookingsAPI = {
         return `${API_HOST}/users/bookings/${userId}`
     },
     BOOK_RIDE_ENDPOINT: `${API_HOST}/users/bookings`
-
 }
 
 export const paymentsAPI = {

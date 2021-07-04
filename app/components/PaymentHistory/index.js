@@ -10,7 +10,6 @@ import {
 import { globalStyles } from "../../shared/globalStyles";
 import { globalConstants } from "../../constants";
 import { numberWithCommas } from "../../helpers/functions";
-import { animBikeTwo } from "../../shared/generalAssets";
 import { paymentHistory } from "../../actions/payments";
 
 const PaymentHistoryComp = ( { navigation, user } ) => {
@@ -89,14 +88,11 @@ const PaymentHistoryComp = ( { navigation, user } ) => {
                             </Card>
                         )
                     } ) ) :
-                        <Card style={[ styles.noResultCard ]}>
-                            <View style={[ styles.caption, globalStyles.justifySpaceBetween ]}>
-                                <Image source={animBikeTwo} style={styles.noResultBike} />
-                                <Text style={[ globalStyles.textGray, styles.title ]}>
-                                    All our bikes are currently rented out.
-                                </Text>
-                            </View>
-                            <Button style={[ globalStyles.btn ]} appearance="ghost" onPress={fetchDataFromServer}>Refresh</Button>
+                        <Card style={[ styles.noResultCard, globalStyles.mt40 ]}>
+                            <Text style={[ globalStyles.textGray, styles.title, globalStyles.textCenter ]}>
+                                Your Have not made any payment yet
+                            </Text>
+                            <Button style={[ globalStyles.btn ]} appearance="ghost" onPress={() => navigation.navigate( "FundWallet" )}>Top up Account</Button>
                         </Card>
                     }
 

@@ -13,7 +13,7 @@ import { globalConstants } from "../../constants";
 import { numberWithCommas } from "../../helpers/functions";
 import { paymentHistory } from "../../actions/payments";
 
-const TopUps = ( { user } ) => {
+const TopUps = ( { navigation, user } ) => {
 
     const [ isFetchingData, setIsFetchingData ] = useState( true ),
         [ responseMessage, setResponseMessage ] = useState( null ),
@@ -73,11 +73,10 @@ const TopUps = ( { user } ) => {
                             </Card>
                         ) ) ) :
                             <Card style={[ styles.noResultCard, globalStyles.mt40 ]}>
-                                <Icon name="alert-triangle-outline" styles={styles.icon} fill={globalConstants.SECONDARY_COLOR} />
-                                <Text style={[ globalStyles.textGray, styles.title ]}>
+                                <Text style={[ globalStyles.textGray, styles.title, globalStyles.textCenter ]}>
                                     Your Have not made any payment yet
                                 </Text>
-                                <Button style={[ globalStyles.btn ]} appearance="ghost" onPress={fetchDataFromServer}>Top up Account</Button>
+                                <Button style={[ globalStyles.btn ]} appearance="ghost" onPress={() => navigation.navigate( "FundWallet" )}>Top up Account</Button>
                             </Card>
                         }
 

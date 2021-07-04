@@ -1,4 +1,5 @@
 export const numberWithCommas = ( e ) => {
+    if ( !e ) return 0;
     return e.toString().replace( /\B(?=(\d{3})+(?!\d))/g, "," );
 };
 

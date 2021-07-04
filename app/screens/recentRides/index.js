@@ -38,7 +38,7 @@ const Rides = ( { user } ) => {
       const userId = user.id;
       setResponseMessage( null );
       setIsFetchingData( true );
-      getBookings( 1, callback );
+      getBookings( userId, callback );
     }
 
   useEffect( () => {
@@ -57,35 +57,39 @@ const Rides = ( { user } ) => {
                 Fetching...
               </Text>
             </View>
-          </Card> : bikeList.length > 0 ? ( bikeList.map( ( booking, index ) => (
-            <Card
-              key={index}
-              style={globalStyles.mt20}
-            >
-              <View
-                style={[
-                  styles.itemBox,
-                  globalStyles.flexRow
-                ]}>
-                <View style={[ styles.thumbArea, globalStyles.centerCenter, globalStyles.bgWhite ]}>
-                  <Image source={{ uri: booking.bike.image }} style={styles.thumb}></Image>
-                </View>
+          </Card> : bikeList.length > 0 ? ( bikeList.map( ( booking, index ) => {
+            if ( booking ) {
+              return ( <Card
+                key={index}
+                style={globalStyles.mt20}
+              >
+                <View
+                  style={[
+                    styles.itemBox,
+                    globalStyles.flexRow
+                  ]}>
+                  <View style={[ styles.thumbArea, globalStyles.centerCenter, globalStyles.bgWhite ]}>
+                    <Image source={{ uri: booking.bike.image }} style={styles.thumb}></Image>
+                  </View>
 
-                <View style={[ styles.caption, globalStyles.justifySpaceBetween ]}>
-                  <Text style={[ globalStyles.textGray, styles.title ]}>
-                    {booking.bike.name}
-                  </Text>
-                  <Text style={styles.small}> {moment( booking.start_time ).fromNow()}</Text>
+                  <View style={[ styles.caption, globalStyles.justifySpaceBetween ]}>
+                    <Text style={[ globalStyles.textGray, styles.title ]}>
+                      {booking.bike.name}
+                    </Text>
+                    <Text style={styles.small}> {booking.start_time ? moment( booking.start_time ).fromNow() : booking.code}</Text>
+                    {booking.price !== 0 ? <Text style={styles.small}> &#8358;{numberWithCommas( booking.price )} for {booking.minutes} minutes ride</Text> : null}
 
-                  <Text style={styles.small}> &#8358;{numberWithCommas( booking.price )} for {booking.minutes} minutes ride</Text>
+                  </View>
                 </View>
-              </View>
-            </Card>
-          ) ) ) : (
-            <Card>
+              </Card> )
+            } else {
+              return <> </>
+            }
+          } ) ) : (
+            <Card style={globalStyles.mt40}>
               <View style={[ styles.caption, globalStyles.justifySpaceBetween ]}>
                 <Text style={[ globalStyles.textGray, styles.title ]}>
-                  You recent rides will appear here
+                  Your recent rides will appear here
                 </Text>
               </View>
             </Card>

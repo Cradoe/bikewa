@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { numberWithCommas } from "../../helpers";
-import { Button, Card, Text, Icon } from "@ui-kitten/components";
+import { Card, Text, Icon } from "@ui-kitten/components";
 import { globalStyles } from "../../shared/globalStyles";
 import { TouchableWithoutFeedback } from "@ui-kitten/components/devsupport";
 import { globalConstants } from "../../constants";
+import { connect } from "react-redux";
 
-export const WalletCard = () => {
+const WalletCardComp = ( { navigation, user } ) => {
 
     const pulseIconRef = React.useRef();
 
@@ -18,7 +19,7 @@ export const WalletCard = () => {
             <TouchableWithoutFeedback style={[
                 styles.fundButton,
                 globalStyles.centerCenter
-            ]} onPress={() => { }}>
+            ]} onPress={() => { navigation.navigate( "FundWallet" ) }}>
                 <Icon fill='#fff' name="plus-circle-outline"
                     animation='pulse'
                     ref={pulseIconRef}
@@ -27,14 +28,21 @@ export const WalletCard = () => {
             </TouchableWithoutFeedback>
             <View>
                 <Text category="h5" style={[ globalStyles.textWhite, { fontWeight: 'bold' } ]}>Wallet Balance</Text>
-                <Text category="h1" style={[ globalStyles.textWhite, globalStyles.textBold ]}> <Text style={globalStyles.textWhite}>&#8358;</Text> {numberWithCommas( 4000 )}</Text>
+                <Text category="h1" style={[ globalStyles.textWhite, globalStyles.textBold ]}> <Text style={globalStyles.textWhite}>&#8358;</Text> {numberWithCommas( user.balance )}</Text>
                 <Text category="label" appearance='hint' style={styles.hint}><Icon fill='#fff' name="shield-outline" style={styles.icon} /> secured with flutterwave</Text>
             </View>
-
-
         </Card>
     </> )
 };
+
+const mapStateToProps = ( state, ownProps ) => {
+    return {
+        user: state.user
+    };
+};
+
+
+export const WalletCard = connect( mapStateToProps )( WalletCardComp );
 
 const styles = StyleSheet.create( {
     card: {

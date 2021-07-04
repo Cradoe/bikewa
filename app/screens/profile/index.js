@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Layout, Card, ListItem } from "@ui-kitten/components";
+import { Text, Layout, Card } from "@ui-kitten/components";
 import { connect } from "react-redux";
 import {
   Image,
@@ -33,15 +33,14 @@ const Profile = ( { navigation, user } ) => {
               paddingHorizontal: 10
             }}
           >
-
             <Card>
               <View style={globalStyles.centerCenter}>
                 <Image source={userAvatar} style={styles.profileImage}></Image>
               </View>
-              <Text style={styles.item} category="h6">Balance: &#8358; {numberWithCommas( 3000 )}</Text>
+              <Text style={styles.item} category="h6">Balance: &#8358; {numberWithCommas( user.balance )}</Text>
               <Text style={styles.item} category="s1">Fullname: {user.fullname}</Text>
-              <Text style={styles.item} category="s1">Matric Number: Ismail Obadimu</Text>
-              <Text style={[ styles.item, { borderBottomWidth: 0 } ]} category="s1">Phone Number: Ismail Obadimu</Text>
+              <Text style={styles.item} category="s1">Matric Number: {user.matric_number}</Text>
+              <Text style={[ styles.item, { borderBottomWidth: 0 } ]} category="s1">Phone Number: {user.phone}</Text>
             </Card>
           </ScrollView>
         </View>

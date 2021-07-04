@@ -1,5 +1,5 @@
 import { Alert } from "react-native";
-import { userAPI, globalConstants, bookingsAPI } from "../../constants";
+import { globalConstants, bookingsAPI } from "../../constants";
 import {
     catchApiRequestError,
     convertObjToFormData,
@@ -10,7 +10,7 @@ import {
 export const bookRide = ( details, callback = {} ) => {
     try {
         const { userId: user_id, bikeId: bike_id } = details;
-        return fetch( bookingsAPI.USER_BOOKINGS_ENDPOINT, {
+        return fetch( bookingsAPI.BOOK_RIDE_ENDPOINT, {
             ...globalConstants.POST_HEADER,
             body: convertObjToFormData( {
                 user_id,
