@@ -1,30 +1,24 @@
-import React, { useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import React from "react";
+import { StyleSheet, View, Image } from "react-native";
 import { numberWithCommas } from "../../helpers";
 import { Card, Text, Icon } from "@ui-kitten/components";
 import { globalStyles } from "../../shared/globalStyles";
 import { TouchableWithoutFeedback } from "@ui-kitten/components/devsupport";
 import { globalConstants } from "../../constants";
 import { connect } from "react-redux";
+import { plusIcon } from "../../shared/generalAssets";
 
 const WalletCardComp = ( { navigation, user } ) => {
 
-    const pulseIconRef = React.useRef();
 
-    useEffect( () => {
-        pulseIconRef.current.startAnimation()
-    }, [] )
     return ( <>
         <Card style={[ globalStyles.mt20, globalStyles.bgSecondary, styles.card ]}>
             <TouchableWithoutFeedback style={[
                 styles.fundButton,
                 globalStyles.centerCenter
             ]} onPress={() => { navigation.navigate( "FundWallet" ) }}>
-                <Icon fill='#fff' name="plus-circle-outline"
-                    animation='pulse'
-                    ref={pulseIconRef}
-                    animationConfig={{ cycles: Infinity }}
-                    style={[ styles.topUpIcon ]} />
+                <Image source={plusIcon} style={styles.topUpIcon} />
+
             </TouchableWithoutFeedback>
             <View>
                 <Text category="h5" style={[ globalStyles.textWhite, { fontWeight: 'bold' } ]}>Wallet Balance</Text>

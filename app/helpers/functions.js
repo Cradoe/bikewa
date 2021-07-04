@@ -13,3 +13,11 @@ export const convertObjToFormData = ( object ) => {
     return formData;
 };
 
+export const generatePaymentReference = () => {
+    const e = new Date(); var t = "BW" + e.getFullYear().toString() + e.getMonth().toString() + e.getMilliseconds().toString() + Math.floor( getRandomNumber() ).toString()
+    return t;
+}
+
+export const getRandomNumber = ( e = 0, t = 100 ) => {
+    return Math.random() * ( t - e ) + e;
+}

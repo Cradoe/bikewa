@@ -7,6 +7,7 @@ import AllBikes from "../screens/allBikes";
 import BikeDetailsScreen from "../screens/bikeDetailsScreen";
 import TopupsScreen from "../screens/topUps";
 import RecentRides from "../screens/recentRides";
+import FundWallet from "../screens/fundWallet";
 
 import { screenOptionStyle } from "./screenOptionStyle";
 
@@ -17,7 +18,18 @@ const lightHeader = {
     backgroundColor: globalConstants.SCREEN_BG
   },
   headerTintColor: globalConstants.PRIMARY_COLOR
-};
+},
+  darkHeader = {
+    headerStyle: {
+      backgroundColor: globalConstants.SECONDARY_COLOR,
+      elevation: 0, // remove shadow on Android
+      shadowOpacity: 0 // remove shadow on iOS
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      color: '#fff'
+    },
+  }
 export const HomeStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
@@ -47,6 +59,14 @@ export const HomeStackNavigator = () => {
         options={{
           title: "Recent Rides",
           ...lightHeader
+        }}
+      />
+      <Stack.Screen
+        name="FundWallet"
+        component={FundWallet}
+        options={{
+          title: "Fund Wallet",
+          ...darkHeader
         }}
       />
     </Stack.Navigator>

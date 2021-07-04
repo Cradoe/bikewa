@@ -76,8 +76,8 @@ const Rides = ( { user } ) => {
                     <Text style={[ globalStyles.textGray, styles.title ]}>
                       {booking.bike.name}
                     </Text>
-                    <Text style={styles.small}> {booking.start_time ? moment( booking.start_time ).fromNow() : booking.code}</Text>
-                    {booking.price !== 0 ? <Text style={styles.small}> &#8358;{numberWithCommas( booking.price )} for {booking.minutes} minutes ride</Text> : null}
+                    <Text style={styles.small}> {booking.start_time ? moment( booking.start_time ).fromNow() : `Access Code: ${booking.code}`}</Text>
+                    {booking.price ? <Text style={styles.small}> &#8358;{numberWithCommas( booking.price )} for {booking.minutes} minutes ride</Text> : <Text style={styles.small}> {moment( booking.created_at ).fromNow()}</Text>}
 
                   </View>
                 </View>

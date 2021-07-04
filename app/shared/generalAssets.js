@@ -12,6 +12,8 @@ import bikeOne from "../assets/images/bikes/1.png";
 import bikeTwo from "../assets/images/bikes/2.jpg";
 import bikeThree from "../assets/images/bikes/3.jpg";
 
+import plusIcon from "../assets/images/plusIcon.png";
+
 export {
     pagerBikeOne,
     pagerBikeTwo,
@@ -22,5 +24,6 @@ export {
     animBikeTwo,
     bikeOne,
     bikeTwo,
-    bikeThree
+    bikeThree,
+    plusIcon
 };

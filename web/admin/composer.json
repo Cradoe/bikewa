@@ -1,6 +1,0 @@
-{
-    "require": {
-        "phpmailer/phpmailer": "^6.4",
-        "mailjet/mailjet-apiv3-php": "^1.5"
-    }
-}

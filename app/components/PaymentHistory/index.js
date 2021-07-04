@@ -84,7 +84,7 @@ const PaymentHistoryComp = ( { navigation, user } ) => {
                             <Card style={globalStyles.mt20} key={index}>
                                 <Text style={globalStyles.textSmall}>Date: {payment.created_at}</Text>
                                 <Text style={globalStyles.textSmall}>Amount: &#8358; {numberWithCommas( payment.amount )}</Text>
-                                <Text style={globalStyles.textSmall}>Payment Code: &#8358; {payment.txref}</Text>
+                                <Text style={globalStyles.textSmall}>Payment Code: #{payment.txref}</Text>
                             </Card>
                         )
                     } ) ) :

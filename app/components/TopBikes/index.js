@@ -91,7 +91,7 @@ export const TopBikes = ( { navigation } ) => {
             <TouchableWithoutFeedback onPress={() => {
               viewBikeDetails( bike.id, bike.name )
             }} key={index}>
-              <Layout style={[ styles.itemBox, globalStyles.shadowBox ]} level="2">
+              <Layout style={[ styles.itemBox, globalStyles.shadowBox, bikeList.length === 1 ? styles.fullItemBox : null ]} level="2">
                 <Image source={{ uri: bike.image }} style={styles.thumb}></Image>
 
                 <View style={globalStyles.bgSecondary}>
@@ -146,6 +146,10 @@ const styles = StyleSheet.create( {
     width: ( 75 / 100 ) * globalConstants.SCREEN_WIDTH,
     marginRight: 20,
     marginVertical: 10,
+  },
+  fullItemBox: {
+    width: ( 84 / 100 ) * globalConstants.SCREEN_WIDTH,
+    marginLeft: 4
   },
   thumb: {
     width: "100%",
