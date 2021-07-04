@@ -7,7 +7,7 @@ import { screenOptionStyle } from "./screenOptionStyle";
 import SplashScreen from "../screens/spashScreen/";
 import LoginScreen from "../screens/loginScreen/";
 import RegisterScreen from "../screens/RegisterScreen";
-import HomeScreen from "../screens/homeScreen/";
+import DrawerNavigatorMenu from "./DrawerNavigator";
 
 const Stack = createStackNavigator();
 
@@ -31,7 +31,7 @@ export const MainStackNavigator = () => {
       <Stack.Navigator screenOptions={screenOptionStyle}>
         <Stack.Screen
           name="HomeScreen"
-          component={HomeScreen}
+          component={DrawerNavigatorMenu}
           options={{ headerShown: false }}
         />
         <Stack.Screen
