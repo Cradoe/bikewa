@@ -58,7 +58,6 @@ const Register = ( { navigation } ) => {
       navigation.navigate( "HomeScreen" );
     },
     errorCallback = ( error ) => {
-      console.log( error );
       setIsSubmitting( false );
       setResponseMessage( error );
     },

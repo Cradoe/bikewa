@@ -30,15 +30,16 @@ export const MainStackNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={screenOptionStyle}>
         <Stack.Screen
-          name="HomeScreen"
-          component={DrawerNavigatorMenu}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="HomeScreen"
+          component={DrawerNavigatorMenu}
+          options={{ headerShown: false }}
+        />
+
         <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}

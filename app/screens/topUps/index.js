@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Text, Layout, Button, Spinner, Card } from "@ui-kitten/components";
+import { Text, Layout, Button, Spinner, Card, Icon } from "@ui-kitten/components";
+import { connect } from "react-redux";
 import {
     Image,
     StyleSheet,
@@ -10,10 +11,9 @@ import {
 import { globalStyles } from "../../shared/globalStyles";
 import { globalConstants } from "../../constants";
 import { numberWithCommas } from "../../helpers/functions";
-import { animBikeTwo } from "../../shared/generalAssets";
 import { paymentHistory } from "../../actions/payments";
 
-const TopUps = () => {
+const TopUps = ( { user } ) => {
 
     const [ isFetchingData, setIsFetchingData ] = useState( true ),
         [ responseMessage, setResponseMessage ] = useState( null ),
@@ -37,7 +37,7 @@ const TopUps = () => {
         fetchDataFromServer = () => {
             setResponseMessage( null );
             setIsFetchingData( true );
-            paymentHistory( 1, callback );
+            paymentHistory( user.id, callback );
         }
 
     useEffect( () => {
@@ -72,14 +72,12 @@ const TopUps = () => {
                                 <Text style={globalStyles.textSmall}>Payment Code: #{payment.txref}</Text>
                             </Card>
                         ) ) ) :
-                            <Card style={[ styles.noResultCard ]}>
-                                <View style={[ styles.caption, globalStyles.justifySpaceBetween ]}>
-                                    <Image source={animBikeTwo} style={styles.noResultBike} />
-                                    <Text style={[ globalStyles.textGray, styles.title ]}>
-                                        All our bikes are currently rented out.
-                                    </Text>
-                                </View>
-                                <Button style={[ globalStyles.btn ]} appearance="ghost" onPress={fetchDataFromServer}>Refresh</Button>
+                            <Card style={[ styles.noResultCard, globalStyles.mt40 ]}>
+                                <Icon name="alert-triangle-outline" styles={styles.icon} fill={globalConstants.SECONDARY_COLOR} />
+                                <Text style={[ globalStyles.textGray, styles.title ]}>
+                                    Your Have not made any payment yet
+                                </Text>
+                                <Button style={[ globalStyles.btn ]} appearance="ghost" onPress={fetchDataFromServer}>Top up Account</Button>
                             </Card>
                         }
 
@@ -90,7 +88,17 @@ const TopUps = () => {
         </SafeAreaView>
     );
 };
-export default TopUps;
+
+
+const mapStateToProps = ( state, ownProps ) => {
+    return {
+        user: state.user
+    };
+};
+
+const TopUpsScreeen = connect( mapStateToProps )( TopUps );
+export default TopUpsScreeen;
+
 
 const styles = StyleSheet.create( {
     loaderCard: {
@@ -114,8 +122,8 @@ const styles = StyleSheet.create( {
         padding: 10
     },
     icon: {
-        height: 10,
-        width: 10
+        width: 32,
+        height: 32,
     },
     heading: {
         fontSize: 15
@@ -124,7 +132,8 @@ const styles = StyleSheet.create( {
         paddingHorizontal: 20
     },
     noResultCard: {
-        width: ( 85 / 100 ) * globalConstants.SCREEN_WIDTH
+        width: ( 85 / 100 ) * globalConstants.SCREEN_WIDTH,
+        height: ( 45 / 100 ) * globalConstants.SCREEN_HEIGHT
     },
     noResultBike: {
         height: 100,

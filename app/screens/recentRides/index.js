@@ -9,7 +9,6 @@ import {
   SafeAreaView
 } from "react-native";
 import { globalStyles } from "../../shared/globalStyles";
-import { globalConstants } from "../../constants";
 import { getBookings } from "../../actions/bookings";
 import moment from "moment";
 import { numberWithCommas } from "../../helpers";

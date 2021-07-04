@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Text, Layout, Icon, Button, Spinner, Card } from "@ui-kitten/components";
+import { Text, Icon, Button, Spinner, Card } from "@ui-kitten/components";
+import { connect } from "react-redux";
 import {
     Image,
     StyleSheet,
@@ -12,7 +13,7 @@ import { numberWithCommas } from "../../helpers/functions";
 import { animBikeTwo } from "../../shared/generalAssets";
 import { paymentHistory } from "../../actions/payments";
 
-export const PaymentHistory = ( { navigation } ) => {
+const PaymentHistoryComp = ( { navigation, user } ) => {
 
     const [ isFetchingData, setIsFetchingData ] = useState( true ),
         [ responseMessage, setResponseMessage ] = useState( null ),
@@ -37,7 +38,7 @@ export const PaymentHistory = ( { navigation } ) => {
         fetchDataFromServer = () => {
             setResponseMessage( null );
             setIsFetchingData( true );
-            paymentHistory( 1, callback );
+            paymentHistory( user.id, callback );
         }
 
     useEffect( () => {
@@ -104,6 +105,17 @@ export const PaymentHistory = ( { navigation } ) => {
         </View>
     );
 };
+
+const mapStateToProps = ( state, ownProps ) => {
+    return {
+        user: state.user
+    };
+};
+
+
+export const PaymentHistory = connect( mapStateToProps )( PaymentHistoryComp );
+
+
 
 const styles = StyleSheet.create( {
     loaderCard: {
