@@ -5,6 +5,8 @@ import { globalConstants } from "../constants";
 import DashboardScreen from "../screens/dashboardScreen";
 import AllBikes from "../screens/allBikes";
 import BikeDetailsScreen from "../screens/bikeDetailsScreen";
+import TopupsScreen from "../screens/topUps";
+import RecentRides from "../screens/recentRides";
 
 import { screenOptionStyle } from "./screenOptionStyle";
 
@@ -29,11 +31,23 @@ export const HomeStackNavigator = () => {
         component={AllBikes}
         options={( { route } ) => ( { title: route.params.name, ...lightHeader } )}
       />
-
       <Stack.Screen
         name="BikeDetails"
         component={BikeDetailsScreen}
         options={( { route } ) => ( { title: route.params.name, ...lightHeader } )}
+      />
+      <Stack.Screen
+        name="Topups"
+        component={TopupsScreen}
+        options={( { route } ) => ( { title: route.params.name, ...lightHeader } )}
+      />
+      <Stack.Screen
+        name="RecentRidesScreen"
+        component={RecentRides}
+        options={{
+          title: "Recent Rides",
+          ...lightHeader
+        }}
       />
     </Stack.Navigator>
   );

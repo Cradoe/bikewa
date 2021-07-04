@@ -19,15 +19,15 @@ const DrawerContent = ( { navigation, state } ) => (
         <DrawerItem title='Home' />
         <DrawerItem title='About' />
         <DrawerItem
-            label="Reviews"
+            title="Reviews"
             onPress={() => Linking.openURL( 'https://ismailobadimu.com' )}
         />
         <DrawerItem
-            label="Help"
+            title="Help"
             onPress={() => Linking.openURL( 'https://ismailobadimu.com' )}
         />
         <DrawerItem
-            label="Website"
+            title="Website"
             onPress={() => Linking.openURL( 'https://ismailobadimu.com' )}
         />
     </Drawer>

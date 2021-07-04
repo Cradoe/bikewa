@@ -2,11 +2,10 @@ import React from "react";
 import { Text, Layout, Card } from "@ui-kitten/components";
 import { StyleSheet, ScrollView, SafeAreaView, StatusBar } from "react-native";
 import { globalStyles } from "../../shared/globalStyles";
-import { globalConstants } from "../../constants";
 
 const About = () => {
   return (
-    <SafeAreaView style={[globalStyles.root, globalStyles.screenBg]}>
+    <SafeAreaView style={[ globalStyles.root, globalStyles.screenBg ]}>
       <Layout style={globalStyles.containerPadding}>
         <StatusBar />
         <Text
@@ -16,11 +15,11 @@ const About = () => {
             styles.heading
           ]}
         >
-          About Us
+          BikeWa
         </Text>
         <ScrollView style={globalStyles.mt20}>
           <Card>
-            <Text style={[globalStyles.textJustify]}>
+            <Text style={[ globalStyles.textJustify ]}>
               This method registers a function that will get called whenver the
               cursor position changes or a change is made to the styling of the
               editor at the cursor's position., The callback will be called with
@@ -42,14 +41,11 @@ const About = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create( {
   heading: {
-    borderBottomColor: globalConstants.SECONDARY_COLOR,
-    borderBottomWidth: 5,
     fontSize: 20,
-    borderRadius: 20,
     marginTop: 30
   }
-});
+} );
 
 export default About;

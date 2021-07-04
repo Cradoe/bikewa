@@ -1,4 +1,4 @@
-const API_HOST = "http://192.168.43.148/2021/bika/api";
+const API_HOST = "http://192.168.43.148/2021/bikewa/api";
 
 export const userAPI = {
     LOGIN_ENDPOINT: `${API_HOST}/users/login`,
@@ -6,13 +6,19 @@ export const userAPI = {
 };
 
 export const bookingsAPI = {
-    BOOK_RIDE_ENDPOINT: ( userId ) => {
+    USER_BOOKINGS_ENDPOINT: ( userId ) => {
         return `${API_HOST}/users/bookings/${userId}`
     },
-    USER_BOOKINGS_ENDPOINT: `${API_HOST}/users/bookings`
+    BOOK_RIDE_ENDPOINT: `${API_HOST}/users/bookings`
 
 }
 
+export const paymentsAPI = {
+    PAYMENT_HISTORY_ENDPOINT: ( userId ) => {
+        return `${API_HOST}/users/payments/${userId}`
+    }
+
+}
 export const bikesAPI = {
     ALL_BIKES_ENDPOINT: `${API_HOST}/bikes/view`,
     BIKE_DETAILS_ENDPOINT: ( bikeId ) => {
