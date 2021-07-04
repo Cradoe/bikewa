@@ -55,7 +55,7 @@ const BikeDetailsScreen = ( { route, navigation } ) => {
         {bikeDetails.name}
       </Text>
       <Text category="s1" style={globalStyles.textSmall}>
-        Price Per Minute: {" "}
+        Price: {" "}
         <Text style={[ globalStyles.textPrimary, globalStyles.textSmall ]}>
           &#8358;{numberWithCommas( bikeDetails.price_per_minute )}
         </Text>

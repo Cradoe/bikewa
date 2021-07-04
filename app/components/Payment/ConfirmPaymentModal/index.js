@@ -38,11 +38,7 @@ export const ConfirmPayment = ( { user, bikeId } ) => {
       bookRide( details, callback )
     }
 
-  useEffect( () => {
-    if ( !hasMadeBooking ) {
-      // processPayment();
-    }
-  }, [] );
+
   return (
     <>
       <Button
@@ -75,7 +71,7 @@ export const ConfirmPayment = ( { user, bikeId } ) => {
                 </View>
                 <View style={[ globalStyles.flexRow, globalStyles.justifyCenter, globalStyles.mt20 ]}>
                   <Button
-                    onPress={() => setVisible( false )}
+                    onPress={() => { () => { setVisible( false ); processPayment(); } }}
                     status="success"
                     style={{ marginRight: 15 }}
                   >
