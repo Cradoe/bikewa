@@ -16,9 +16,11 @@ export const ConfirmPayment = ( { user, bikeId } ) => {
     [ responseMessage, setResponseMessage ] = useState( null ),
     [ bookingCode, setBookingCode ] = useState( "" ),
     successCallback = ( data ) => {
-      setBookingCode( data.code );
-      setHasMadeBooking( true );
-      setIsProcessing( false );
+      setTimeout( () => {
+        setBookingCode( data.code );
+        setHasMadeBooking( true );
+        setIsProcessing( false );
+      }, 5000 );
     },
     errorCallback = ( error ) => {
       setResponseMessage( error );
@@ -38,16 +40,16 @@ export const ConfirmPayment = ( { user, bikeId } ) => {
       bookRide( details, callback )
     }
 
-
   return (
     <>
       <Button
+        disabled={hasMadeBooking ? true : false}
         style={globalStyles.mt20}
-        accessoryRight={navigateIcon} onPress={() => setVisible( true )}
+        accessoryRight={navigateIcon} onPress={() => { setVisible( true ); processPayment(); }}
         status="primary"
         appearance="outline"
         size="medium">
-        <Text style={globalStyles.textSmall}>Unlock Bike</Text>
+        <Text style={globalStyles.textSmall}>{hasMadeBooking ? `Code: ${bookingCode}` : "Unlock Bike"}</Text>
       </Button>
 
       <Modal visible={visible} backdropStyle={styles.backdrop}>
@@ -71,7 +73,7 @@ export const ConfirmPayment = ( { user, bikeId } ) => {
                 </View>
                 <View style={[ globalStyles.flexRow, globalStyles.justifyCenter, globalStyles.mt20 ]}>
                   <Button
-                    onPress={() => { () => { setVisible( false ); processPayment(); } }}
+                    onPress={() => setVisible( false )}
                     status="success"
                     style={{ marginRight: 15 }}
                   >

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Divider, Layout, Text, Icon, Spinner } from "@ui-kitten/components";
+import { Card, Divider, Layout, Text, Spinner } from "@ui-kitten/components";
 import {
   SafeAreaView,
   View,

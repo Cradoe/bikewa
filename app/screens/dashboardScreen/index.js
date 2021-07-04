@@ -2,7 +2,6 @@ import React from "react";
 import { Layout, Button } from "@ui-kitten/components";
 import { SafeAreaView } from "react-native";
 import { globalConstants } from "../../constants";
-import { Header } from "../../components/Header/"
 import { TopBikes } from "../../components/TopBikes/"
 import { globalStyles } from "../../shared/globalStyles";
 import { WalletCard } from "../../components/WalletCard";

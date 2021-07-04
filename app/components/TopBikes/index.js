@@ -11,6 +11,7 @@ import { globalStyles } from "../../shared/globalStyles";
 import { fetchAllBikes } from "../../actions/bikes";
 import { globalConstants } from "../../constants";
 import { numberWithCommas } from "../../helpers/functions";
+import { animBikeTwo } from "../../shared/generalAssets";
 
 export const TopBikes = ( { navigation } ) => {
 
@@ -115,12 +116,14 @@ export const TopBikes = ( { navigation } ) => {
               </Layout>
             </TouchableWithoutFeedback>
           ) ) ) :
-            <Card>
+            <Card style={[ styles.noResultCard ]}>
               <View style={[ styles.caption, globalStyles.justifySpaceBetween ]}>
+                <Image source={animBikeTwo} style={styles.noResultBike} />
                 <Text style={[ globalStyles.textGray, styles.title ]}>
-                  No Bike available
+                  All our bikes are currently rented out.
                 </Text>
               </View>
+              <Button style={[ globalStyles.btn ]} appearance="ghost" onPress={fetchDataFromServer}>Refresh</Button>
             </Card>
           }
 
@@ -160,5 +163,12 @@ const styles = StyleSheet.create( {
   },
   title: {
     paddingHorizontal: 20
+  },
+  noResultCard: {
+    width: ( 85 / 100 ) * globalConstants.SCREEN_WIDTH
+  },
+  noResultBike: {
+    height: 100,
+    width: 150
   }
 } );

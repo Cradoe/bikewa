@@ -1,23 +1,37 @@
-import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 import { numberWithCommas } from "../../helpers";
-import { Button, Card, Text } from "@ui-kitten/components";
+import { Button, Card, Text, Icon } from "@ui-kitten/components";
 import { globalStyles } from "../../shared/globalStyles";
+import { TouchableWithoutFeedback } from "@ui-kitten/components/devsupport";
+import { globalConstants } from "../../constants";
 
 export const WalletCard = () => {
+
+    const pulseIconRef = React.useRef();
+
+    useEffect( () => {
+        pulseIconRef.current.startAnimation()
+    }, [] )
     return ( <>
         <Card style={[ globalStyles.mt20, globalStyles.bgSecondary, styles.card ]}>
-            <Text category="h5" style={[ globalStyles.textWhite, { fontWeight: 'bold' } ]}>Wallet</Text>
-            <Text category="h1" style={globalStyles.textWhite}> <Text style={globalStyles.textWhite}>&#8358;</Text> {numberWithCommas( 4000 )}</Text>
-            <Button size="tiny" style={[
-                globalStyles.mt30,
-                globalStyles.btn,
-                globalStyles.bgTransparent,
-                globalStyles.borderPrimary,
-                styles.fundButton
-            ]}>
-                <Text style={{ color: '#fff' }}>Fund Wallet</Text>
-            </Button>
+            <TouchableWithoutFeedback style={[
+                styles.fundButton,
+                globalStyles.centerCenter
+            ]} onPress={() => { }}>
+                <Icon fill='#fff' name="plus-circle-outline"
+                    animation='pulse'
+                    ref={pulseIconRef}
+                    animationConfig={{ cycles: Infinity }}
+                    style={[ styles.topUpIcon ]} />
+            </TouchableWithoutFeedback>
+            <View>
+                <Text category="h5" style={[ globalStyles.textWhite, { fontWeight: 'bold' } ]}>Wallet Balance</Text>
+                <Text category="h1" style={[ globalStyles.textWhite, globalStyles.textBold ]}> <Text style={globalStyles.textWhite}>&#8358;</Text> {numberWithCommas( 4000 )}</Text>
+                <Text category="label" appearance='hint' style={styles.hint}><Icon fill='#fff' name="shield-outline" style={styles.icon} /> secured with flutterwave</Text>
+            </View>
+
+
         </Card>
     </> )
 };
@@ -25,11 +39,28 @@ export const WalletCard = () => {
 const styles = StyleSheet.create( {
     card: {
         paddingVertical: 10,
-        height: 200,
-        borderRadius: 10
+        height: 150,
+        borderRadius: 10,
+        position: 'relative'
     },
     fundButton: {
-        justifyContent: "flex-start",
-        width: '50%'
+        width: 50,
+        height: 50,
+        borderRadius: 100,
+        borderColor: globalConstants.PRIMARY_COLOR,
+        borderWidth: 1,
+        position: 'absolute',
+        right: 10
+    },
+    topUpIcon: {
+        height: 30,
+        width: 30,
+    },
+    icon: {
+        height: 10,
+        width: 10
+    },
+    hint: {
+        fontSize: 10
     }
 } );
