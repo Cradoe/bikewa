@@ -39,5 +39,36 @@
         function bookings_num(){
             return DB::num_row("SELECT id FROM bookings ", []);
         }
+
+
+
+
+
+
+        function fetch_payments(){
+            return DB::fetchAll("SELECT *,payments.created_at,payments.id FROM payments
+            LEFT OUTER JOIN users on users.id = payments.user_id
+            ORDER BY payments.id ASC ",[]);
+        }
+
+        function fetch_limited_payments($limit){
+            return DB::fetchAll("SELECT *,payments.created_at,payments.id FROM payments
+            LEFT OUTER JOIN users on users.id = payments.user_id
+            ORDER BY payments.id ASC LIMIT $limit ",[]);
+        }
+
+        function fetch_payment($id){
+            return DB::fetch("SELECT *,payments.id FROM payments
+            LEFT OUTER JOIN users on users.id = payments.user_id
+            WHERE  payments.id = ? OR code = ? ",[$id,$id] );
+        }
+       
+        function payments_num(){
+            return DB::num_row("SELECT id FROM payments ", []);
+        }
+       
+        function payments_total_amount(){
+            return DB::fetch("SELECT sum(amount) as amount FROM payments ", []);
+        }
     }
 ?>
