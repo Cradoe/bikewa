@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if (isset($_SESSION['bikewa_admin'])) {
+if (isset($_SESSION['bike_admin'])) {
     header('location: dashboard');
     exit();
 }

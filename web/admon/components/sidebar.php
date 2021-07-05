@@ -72,6 +72,7 @@
                                         <span class="sidebar-menu-text">Add Bike</span>
                                     </a>
                                 </li>
+                                <li class="sidebar-menu-item">
                                     <a class="sidebar-menu-button" href="view_bikes">
                                         <span class="sidebar-menu-text">View Bikes</span>
                                     </a>
@@ -95,6 +96,7 @@
                                         <span class="sidebar-menu-text">Confirm Booking</span>
                                     </a>
                                 </li>
+                                <li class="sidebar-menu-item">
                                     <a class="sidebar-menu-button" href="view_bookings">
                                         <span class="sidebar-menu-text">View Bookings</span>
                                     </a>
@@ -114,10 +116,6 @@
                             
                             <ul class="sidebar-submenu collapse" id="payments_menu">
                                 <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" href="confirm_payment">
-                                        <span class="sidebar-menu-text">Confirm Payment</span>
-                                    </a>
-                                </li>
                                     <a class="sidebar-menu-button" href="view_payments">
                                         <span class="sidebar-menu-text">View Payments</span>
                                     </a>
@@ -127,21 +125,17 @@
 
 
                         <li class="sidebar-menu-item">
-                            <a class="sidebar-menu-button" data-toggle="collapse" href="#payments_menu">
+                            <a class="sidebar-menu-button" data-toggle="collapse" href="#users_menu">
                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">developer_board</i>
-                                <span class="sidebar-menu-text">Payments</span>
+                                <span class="sidebar-menu-text">Users</span>
                                 <span class="badge badge-warning rounded-circle badge-notifications ml-auto" style="margin: .1875rem .375rem;"></span>
                                 <span class="ml-auto sidebar-menu-toggle-icon"></span>
                             </a>
                             
-                            <ul class="sidebar-submenu collapse" id="payments_menu">
+                            <ul class="sidebar-submenu collapse" id="users_menu">
                                 <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" href="confirm_payment">
-                                        <span class="sidebar-menu-text">Confirm Payment</span>
-                                    </a>
-                                </li>
-                                    <a class="sidebar-menu-button" href="view_payments">
-                                        <span class="sidebar-menu-text">View Payments</span>
+                                    <a class="sidebar-menu-button" href="view_users">
+                                        <span class="sidebar-menu-text">View Users</span>
                                     </a>
                                 </li>
                             </ul>
