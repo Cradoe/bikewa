@@ -43,7 +43,7 @@
             </div>
 
             <div class="py-4 text-center flex-shrink-0">
-                <a style="min-width: 157px;" href="/add_bike" class="btn btn-primary">Create <i class="material-icons ml-1">add</i></a>
+                <a style="min-width: 157px;" href="add_bike" class="btn btn-primary">Create <i class="material-icons ml-1">add</i></a>
             </div>
 
 
