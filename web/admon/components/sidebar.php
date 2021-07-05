@@ -83,7 +83,7 @@
 
                         <li class="sidebar-menu-item">
                             <a class="sidebar-menu-button" data-toggle="collapse" href="#bookings_menu">
-                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">donut_small</i>
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">description</i>
                                 <span class="sidebar-menu-text">Bookings</span>
                                 <span class="badge badge-warning rounded-circle badge-notifications ml-auto" style="margin: .1875rem .375rem;"></span>
                                 <span class="ml-auto sidebar-menu-toggle-icon"></span>
@@ -97,6 +97,51 @@
                                 </li>
                                     <a class="sidebar-menu-button" href="view_bookings">
                                         <span class="sidebar-menu-text">View Bookings</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" data-toggle="collapse" href="#payments_menu">
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">monetization_on</i>
+                                <span class="sidebar-menu-text">Payments</span>
+                                <span class="badge badge-warning rounded-circle badge-notifications ml-auto" style="margin: .1875rem .375rem;"></span>
+                                <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                            </a>
+                            
+                            <ul class="sidebar-submenu collapse" id="payments_menu">
+                                <li class="sidebar-menu-item">
+                                    <a class="sidebar-menu-button" href="confirm_payment">
+                                        <span class="sidebar-menu-text">Confirm Payment</span>
+                                    </a>
+                                </li>
+                                    <a class="sidebar-menu-button" href="view_payments">
+                                        <span class="sidebar-menu-text">View Payments</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" data-toggle="collapse" href="#payments_menu">
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">developer_board</i>
+                                <span class="sidebar-menu-text">Payments</span>
+                                <span class="badge badge-warning rounded-circle badge-notifications ml-auto" style="margin: .1875rem .375rem;"></span>
+                                <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                            </a>
+                            
+                            <ul class="sidebar-submenu collapse" id="payments_menu">
+                                <li class="sidebar-menu-item">
+                                    <a class="sidebar-menu-button" href="confirm_payment">
+                                        <span class="sidebar-menu-text">Confirm Payment</span>
+                                    </a>
+                                </li>
+                                    <a class="sidebar-menu-button" href="view_payments">
+                                        <span class="sidebar-menu-text">View Payments</span>
                                     </a>
                                 </li>
                             </ul>
