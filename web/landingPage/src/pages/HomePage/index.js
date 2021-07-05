@@ -14,39 +14,39 @@ import ScreenshotAreaSection from "../../components/screenshotAreaSection";
 import TestimonialArea from "../../components/testimonialArea";
 import VideoSection from "../../components/videoSection";
 
-const  HomePage = ()=> {
+const HomePage = () => {
   return (
     <>
- 
-    <Preloader />
-    
-   <Header />
-    
-    <Homesection />
 
-    <Coresection />
-    
-    <Aboutsection />
-    
-    <VideoSection />
-    
-   <AwesomeFeatAreaSection />
+      <Preloader />
 
-    <HowWorkAreaSection />
-   
-    <ScreenshotAreaSection />
+      <Header />
 
-    <PricingAreaSection />
+      <Homesection />
 
-    <CustomPlanArea />
-  
-    <TestimonialArea />
+      <Coresection />
 
-    <AppDownloadArea />
+      <Aboutsection />
 
-    <FaqAreaSection />
+      <VideoSection />
 
-    <Footer />
+      <AwesomeFeatAreaSection />
+
+      <HowWorkAreaSection />
+
+      <ScreenshotAreaSection />
+
+      <PricingAreaSection />
+
+      <CustomPlanArea />
+
+      <TestimonialArea />
+
+      <AppDownloadArea />
+
+      <FaqAreaSection />
+
+      <Footer />
 
     </>
   );
